@@ -443,6 +443,37 @@ CREATE TABLE model (
     osm TEXT
 );
 
+CREATE TABLE schedule (
+    metadata_id INTEGER NOT NULL REFERENCES metadata(id),
+    "day" INTEGER NOT NULL,
+    hour INTEGER NOT NULL,
+    minute INTEGER NOT NULL,
+    occupants REAL NOT NULL,
+    cooking_range REAL NOT NULL,
+    plug_loads REAL NOT NULL,
+    lighting_interior REAL NOT NULL,
+    lighting_exterior REAL NOT NULL,
+    lighting_garage REAL NOT NULL,
+    lighting_exterior_holiday REAL NOT NULL,
+    clothes_washer REAL NOT NULL,
+    clothes_dryer REAL NOT NULL,
+    dishwasher REAL NOT NULL,
+    baths REAL NOT NULL,
+    showers REAL NOT NULL,
+    sinks REAL NOT NULL,
+    ceiling_fan REAL NOT NULL,
+    clothes_dryer_exhaust REAL NOT NULL,
+    clothes_washer_power REAL NOT NULL,
+    dishwasher_power REAL NOT NULL,
+    plug_loads_vehicle REAL NOT NULL,
+    plug_loads_well_pump REAL NOT NULL,
+    fuel_loads_grill REAL NOT NULL,
+    fuel_loads_lighting REAL NOT NULL,
+    fuel_loads_fireplace REAL NOT NULL,
+    vacancy REAL NOT NULL,
+    PRIMARY KEY (metadata_id, "day", hour, minute)
+);
+
 -- views
 DROP VIEW IF EXISTS building_energy_performance_simulation_input;
 CREATE VIEW building_energy_performance_simulation_input AS

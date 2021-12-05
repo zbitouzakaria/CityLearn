@@ -186,6 +186,7 @@ class ResstockDatabase(SQLiteDatabase):
             self.__update_weather_table(dataset_id,buildings)
             self.__update_timeseries_table(dataset,buildings)
             self.__update_model_table(dataset,buildings)
+            self.__update_schedule_table(dataset,buildings)
         else:
             pass
         
@@ -400,7 +401,31 @@ class ResstockDatabase(SQLiteDatabase):
             values,
             on_conflict_fields=['metadata_id']
         )
-        
+
+    def __update_schedule_table(self,dataset,buildings):
+        # this is a temporary fix until NREL uploads the schedules.csv files in the data repository
+        url = 'https://raw.githubusercontent.com/NREL/resstock/develop/files/8760.csv'
+        data = pd.read_csv(url)
+        data['timestamp'] = pd.date_range('2019-01-01 00:00:00','2019-12-31 23:00:00',freq='H')
+        data = data.set_index('timestamp')
+        data = data.resample('900S').ffill()
+        data = pd.concat([data]+[data.iloc[-1:] for _ in range(3)])
+        data = data.reset_index(drop=False)
+        data['day'] = data.index
+        data['hour'] = data['timestamp'].dt.hour
+        data['minute'] = data['timestamp'].dt.minute
+        data = data.drop(columns=['timestamp'])
+
+        for metadata_id in buildings['metadata_id']:
+            data['metadata_id'] = metadata_id
+            self.insert(
+                'schedule',
+                data.columns.tolist(),
+                data.to_records(index=False),
+                on_conflict_fields=['metadata_id','day','hour','minute']
+            )
+            break
+
     @classmethod
     def download_metadata(cls,dataset_type,weather_data,year_of_publication,release):
         data = cls.__download(dataset_type,weather_data,year_of_publication,release,'metadata')
