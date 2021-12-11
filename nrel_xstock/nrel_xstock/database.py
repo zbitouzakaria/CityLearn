@@ -141,12 +141,11 @@ class SQLiteDatabase:
             on_conflict_fields_placeholder = ', '.join([f'\"{field}\"' for field in on_conflict_fields])
             on_conflict_placeholder = f'({", ".join(on_conflict_update_fields)}) = '\
                 f'({", ".join(["EXCLUDED." + field for field in on_conflict_update_fields])})'
-            query += f"ON CONFLICT ({on_conflict_fields_placeholder}) "
 
             if ignore_on_conflict or len(set(fields+on_conflict_fields)) == len(on_conflict_fields):
-                query += 'IGNORE'
+                query = query.replace('INSERT','INSERT OR IGNORE')
             else:
-                query += f"DO UPDATE SET {on_conflict_placeholder}"
+                query += f"ON CONFLICT ({on_conflict_fields_placeholder}) DO UPDATE SET {on_conflict_placeholder}"
         
         else:
             pass
