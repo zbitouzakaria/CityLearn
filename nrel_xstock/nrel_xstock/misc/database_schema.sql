@@ -478,7 +478,8 @@ CREATE TABLE schedule (
 DROP VIEW IF EXISTS building_energy_performance_simulation_input;
 CREATE VIEW building_energy_performance_simulation_input AS
     SELECT
-        m.*,
+        m.id AS metadata_id,
+        m.bldg_id,
         d.osm,
         w.epw,
         w.ddy

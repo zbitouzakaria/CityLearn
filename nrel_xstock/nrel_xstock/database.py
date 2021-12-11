@@ -99,6 +99,15 @@ class SQLiteDatabase:
             connection.close()
 
     def insert_file(self,filepath,table_name,**kwargs):
+        df = self.read_file(filepath)
+        kwargs['values'] = df.to_records(index=False)
+        kwargs['fields'] = kwargs.get('fields',list(df.columns))
+        kwargs['table_name'] = table_name
+        kwargs['on_conflict_fields'] = kwargs.get('on_conflict_fields',None)
+        kwargs['ignore_on_conflict'] = kwargs.get('ignore_on_conflict',False)
+        self.insert(**kwargs)
+
+    def read_file(self,filepath):
         reader = {
             'csv':pd.read_csv,
             'pkl':pd.read_pickle,
@@ -109,17 +118,12 @@ class SQLiteDatabase:
 
         if method is not None:
             df = method(filepath)
-
         else:
-            raise TypeError(f'Unsupported file extension: .{extension}. Supported file extensions are {list(reader.values())}')
+            raise TypeError(f'Unsupported file extension: .{extension}. Supported file extensions are {list(reader.keys())}')
         
-        
-        kwargs['values'] = df.to_records(index=False)
-        kwargs['fields'] = kwargs.get(kwargs['fields'],list(df.columns))
-        kwargs['table_name'] = table_name
-        self.insert(**kwargs)
+        return df
 
-    def insert(self,table_name,fields,values,on_conflict_fields=None):
+    def insert(self,table_name,fields,values,on_conflict_fields=None,ignore_on_conflict=False):
         values = [
             [
                 None if isinstance(values[i][j],(int,float)) and math.isnan(values[i][j])\
@@ -133,15 +137,16 @@ class SQLiteDatabase:
         """
 
         if on_conflict_fields:
-            if len(fields) != len(on_conflict_fields):
-                on_conflict_update_fields = [f'\"{field}\"' for field in fields if field not in on_conflict_fields]
-                on_conflict_fields_placeholder = ', '.join([f'\"{field}\"' for field in on_conflict_fields])
-                on_conflict_placeholder = f'({", ".join(on_conflict_update_fields)}) = '\
-                    f'({", ".join(["EXCLUDED." + field for field in on_conflict_update_fields])})'
-                query += f"ON CONFLICT ({on_conflict_fields_placeholder}) DO UPDATE SET {on_conflict_placeholder}"
-            
+            on_conflict_update_fields = [f'\"{field}\"' for field in fields if field not in on_conflict_fields]
+            on_conflict_fields_placeholder = ', '.join([f'\"{field}\"' for field in on_conflict_fields])
+            on_conflict_placeholder = f'({", ".join(on_conflict_update_fields)}) = '\
+                f'({", ".join(["EXCLUDED." + field for field in on_conflict_update_fields])})'
+            query += f"ON CONFLICT ({on_conflict_fields_placeholder}) "
+
+            if ignore_on_conflict or len(set(fields+on_conflict_fields)) == len(on_conflict_fields):
+                query += 'IGNORE'
             else:
-                query = query.replace('INSERT','INSERT OR IGNORE')
+                query += f"DO UPDATE SET {on_conflict_placeholder}"
         
         else:
             pass
@@ -186,7 +191,7 @@ class ResstockDatabase(SQLiteDatabase):
             self.__update_weather_table(dataset_id,buildings)
             self.__update_timeseries_table(dataset,buildings)
             self.__update_model_table(dataset,buildings)
-            self.__update_schedule_table(dataset,buildings)
+            self.__update_schedule_table(buildings)
         else:
             pass
         
@@ -380,6 +385,7 @@ class ResstockDatabase(SQLiteDatabase):
                 data.to_records(index=False),
                 ['metadata_id','timestamp']
             )
+            break
 
     def __update_model_table(self,dataset,buildings):
         buildings = buildings[['bldg_id','metadata_id','upgrade']].to_records(index=False)
@@ -394,6 +400,7 @@ class ResstockDatabase(SQLiteDatabase):
             decompressed_file = gzip.GzipFile(fileobj=compressed_file,mode='rb')
             osm = decompressed_file.read().decode()
             values.append((metadata_id,osm))
+            break
         
         self.insert(
             'model',
@@ -402,7 +409,7 @@ class ResstockDatabase(SQLiteDatabase):
             on_conflict_fields=['metadata_id']
         )
 
-    def __update_schedule_table(self,dataset,buildings):
+    def __update_schedule_table(self,buildings):
         # this is a temporary fix until NREL uploads the schedules.csv files in the data repository
         url = 'https://raw.githubusercontent.com/NREL/resstock/develop/files/8760.csv'
         data = pd.read_csv(url)
