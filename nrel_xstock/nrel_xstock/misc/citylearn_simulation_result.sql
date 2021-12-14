@@ -43,6 +43,7 @@ WITH zone_conditioning AS (
     SELECT
         r.TimeIndex,
         r.ReportDataDictionaryIndex,
+        'setpoint_difference' AS label,
         ABS(s.value - r.Value)*z.conditioned_floor_area_proportion AS "value"
     FROM ReportData r
     INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = r.ReportDataDictionaryIndex
@@ -69,6 +70,7 @@ WITH zone_conditioning AS (
     SELECT
         r.TimeIndex,
         r.ReportDataDictionaryIndex,
+        'indoor_environment' AS label,
         r.Value*z.conditioned_floor_area_proportion AS "value"
     FROM ReportData r
     INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = r.ReportDataDictionaryIndex
@@ -76,6 +78,8 @@ WITH zone_conditioning AS (
     WHERE
         (d.Name = 'Zone Air Temperature' AND (z.is_cooled != 0 OR z.is_heated != 0))
         OR (d.Name = 'Zone Air Relative Humidity' AND (z.is_cooled != 0 OR z.is_heated != 0))
+        OR (d.Name = 'Zone Thermostat Cooling Setpoint Temperature' AND (z.is_cooled != 0 OR z.is_heated != 0))
+        OR (d.Name = 'Zone Thermostat Heating Setpoint Temperature' AND (z.is_cooled != 0 OR z.is_heated != 0))
 
     UNION
 
@@ -83,6 +87,7 @@ WITH zone_conditioning AS (
     SELECT
         r.TimeIndex,
         r.ReportDataDictionaryIndex,
+        'electrical_load' AS label,
         r.Value AS "value"
     FROM ReportData r
     INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = r.ReportDataDictionaryIndex
@@ -99,12 +104,13 @@ WITH zone_conditioning AS (
     SELECT
         r.TimeIndex,
         r.ReportDataDictionaryIndex,
+        'thermal_load' AS label,
         r.Value AS "value"
     FROM ReportData r
     INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = r.ReportDataDictionaryIndex
     WHERE d.Name IN (
-        'Zone Predicted Sensible Load to Cooling Setpoint Heat Transfer Rate',
-        'Zone Predicted Sensible Load to Heating Setpoint Heat Transfer Rate'
+        'Zone Ideal Loads Zone Total Cooling Energy',
+        'Zone Ideal Loads Zone Total Heating Energy'
     )
 
 ), "aggregate" AS (
@@ -112,26 +118,34 @@ WITH zone_conditioning AS (
     SELECT
         u.TimeIndex,
         d.Name,
+        u.label,
         SUM(u.value) AS value
     FROM unioned_variables u
     INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = u.ReportDataDictionaryIndex
     GROUP BY
         u.TimeIndex,
+        label,
         d.Name
 ), aggregate_pivot AS (
     -- pivot table to match CityLearn input format
     SELECT
         a.TimeIndex,
         SUM(CASE WHEN a.Name = 'Zone Air Temperature' THEN a.value END) AS "Indoor Temperature (C)",
-        SUM(CASE WHEN a.Name = 'Zone Thermostat Cooling Setpoint Temperature' THEN a.value END) AS "Average Unmet Cooling Setpoint Difference (C)",
-        SUM(CASE WHEN a.Name = 'Zone Thermostat Heating Setpoint Temperature' THEN a.value END) AS "Average Unmet Heating Setpoint Difference (C)",
+        SUM(CASE WHEN a.Name = 'Zone Thermostat Cooling Setpoint Temperature'
+            AND a.label = 'setpoint_difference' THEN a.value END
+        ) AS "Average Unmet Cooling Setpoint Difference (C)",
+        SUM(CASE WHEN a.Name = 'Zone Thermostat Heating Setpoint Temperature'
+            AND a.label = 'setpoint_difference' THEN a.value END
+        ) AS "Average Unmet Heating Setpoint Difference (C)",
         SUM(CASE WHEN a.Name = 'Zone Air Relative Humidity' THEN a.value END) AS "Indoor Relative Humidity (%)",
         SUM(CASE WHEN a.Name = 'Water Heater Heating Energy' THEN (a.value/3600)/1000 END) AS "DHW Heating (kWh)",
-        SUM(CASE WHEN a.Name = 'Zone Predicted Sensible Load to Cooling Setpoint Heat Transfer Rate' THEN a.value/1000 END) AS "Cooling Load (kWh)",
-        SUM(CASE WHEN a.Name = 'Zone Predicted Sensible Load to Heating Setpoint Heat Transfer Rate' THEN a.value/1000 END) AS "Heating Load (kWh)",
+        SUM(CASE WHEN a.Name = 'Zone Ideal Loads Zone Total Cooling Energy' THEN a.value/1000 END) AS "Cooling Load (kWh)",
+        SUM(CASE WHEN a.Name = 'Zone Ideal Loads Zone Total Heating Energy' THEN a.value/1000 END) AS "Heating Load (kWh)",
+        SUM(CASE WHEN a.Name = 'Zone Thermostat Cooling Setpoint Temperature' THEN a.value END) AS "Cooling Setpoint",
+        SUM(CASE WHEN a.Name = 'Zone Thermostat Heating Setpoint Temperature' THEN a.value END) AS "Heating Setpoint",
         SUM(CASE WHEN a.Name IN (
-            'Exterior Lights Electricity Energy', 'Lights Electricity Energy', 'Electric Equipment Electricity Energy'
-        ) THEN (a.value/3600)/1000 END) AS "Equipment Electric Power (kWh)"
+            'Exterior Lights Electricity Energy', 'Lights Electricity Energy', 'Electric Equipment Electricity Energy') THEN (a.value/3600)/1000 END
+        ) AS "Equipment Electric Power (kWh)"
     FROM aggregate a
     GROUP BY
         a.TimeIndex
