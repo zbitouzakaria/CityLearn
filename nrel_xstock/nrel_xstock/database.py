@@ -29,6 +29,8 @@ class SQLiteDatabase:
 
     def __validate_query(self,query):
         query = query.replace(',)',')')
+        query = query.replace('\n','')
+        query = query.replace('\r','')
         return query
     
     def build(self,schema_filepath=None,overwrite=False,apply_changes=False):
@@ -54,6 +56,7 @@ class SQLiteDatabase:
         try:
             connection = self.__get_connection()
             df = pd.read_sql(self.__validate_query(query),connection)
+            connection.commit()
         finally:
             connection.close()
 
@@ -74,6 +77,7 @@ class SQLiteDatabase:
         try:
             connection = self.__get_connection()
             connection.execute('VACUUM')
+            connection.commit()
         finally:
             connection.close()
 
@@ -82,6 +86,7 @@ class SQLiteDatabase:
             connection = self.__get_connection()
             query = f"DROP {'VIEW' if is_view else 'TABLE'} IF EXISTS {name}"
             connection.execute(self.__validate_query(query))
+            connection.commit()
         finally:
             connection.close()
 
@@ -94,6 +99,7 @@ class SQLiteDatabase:
 
             for query in queries.split(';'):
                 connection.execute(self.__validate_query(query))
+                connection.commit()
         
         finally:
             connection.close()
@@ -166,8 +172,8 @@ class SQLiteDatabase:
 class ResstockDatabase(SQLiteDatabase):
     __ROOT_URL = 'https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/'
 
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
+    def __init__(self,filepath):
+        super().__init__(filepath)
 
     def build(self,overwrite=False,apply_changes=False):
         schema_filepath = os.path.join(os.path.dirname(__file__),'misc/database_schema.sql')
@@ -384,7 +390,6 @@ class ResstockDatabase(SQLiteDatabase):
                 data.to_records(index=False),
                 ['metadata_id','timestamp']
             )
-            break
 
     def __update_model_table(self,dataset,buildings):
         buildings = buildings[['bldg_id','metadata_id','upgrade']].to_records(index=False)
@@ -399,7 +404,6 @@ class ResstockDatabase(SQLiteDatabase):
             decompressed_file = gzip.GzipFile(fileobj=compressed_file,mode='rb')
             osm = decompressed_file.read().decode()
             values.append((metadata_id,osm))
-            break
         
         self.insert(
             'model',
@@ -430,7 +434,6 @@ class ResstockDatabase(SQLiteDatabase):
                 data.to_records(index=False),
                 on_conflict_fields=['metadata_id','day','hour','minute']
             )
-            break
 
     @classmethod
     def download_metadata(cls,dataset_type,weather_data,year_of_publication,release):
