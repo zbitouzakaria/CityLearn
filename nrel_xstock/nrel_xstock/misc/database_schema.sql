@@ -1,5 +1,5 @@
--- tables
-CREATE TABLE dataset (
+-- x-stock tables
+CREATE TABLE IF NOT EXISTS dataset (
     id INTEGER PRIMARY KEY NOT NULL,
     dataset_type TEXT NOT NULL,
     weather_data TEXT NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE dataset (
     UNIQUE (dataset_type, weather_data, year_of_publication, release)
 );
 
-CREATE TABLE weather (
+CREATE TABLE IF NOT EXISTS weather (
     id INTEGER PRIMARY KEY NOT NULL,
     dataset_id INTEGER NOT NULL REFERENCES dataset(id),
     weather_file_tmy3 TEXT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE weather (
     UNIQUE (dataset_id, weather_file_tmy3, weather_file_latitude, weather_file_longitude)
 );
 
-CREATE TABLE data_dictionary (
+CREATE TABLE IF NOT EXISTS data_dictionary (
     id INTEGER PRIMARY KEY NOT NULL,
     dataset_id INTEGER NOT NULL REFERENCES dataset(id),
     field_location TEXT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE data_dictionary (
     UNIQUE (dataset_id, field_location, field_name)
 );
 
-CREATE TABLE upgrade_dictionary (
+CREATE TABLE IF NOT EXISTS upgrade_dictionary (
     id INTEGER PRIMARY KEY NOT NULL,
     dataset_id INTEGER NOT NULL REFERENCES dataset(id),
     upgrade_id INTEGER NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE upgrade_dictionary (
     UNIQUE (dataset_id, upgrade_id)
 );
 
-CREATE TABLE spatial_tract (
+CREATE TABLE IF NOT EXISTS spatial_tract (
     id INTEGER PRIMARY KEY NOT NULL,
     dataset_id INTEGER NOT NULL REFERENCES dataset(id),
     nhgis_tract_gisjoin TEXT NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE spatial_tract (
     UNIQUE (dataset_id, nhgis_tract_gisjoin)
 );
 
-CREATE TABLE metadata (
+CREATE TABLE IF NOT EXISTS metadata (
     id INTEGER PRIMARY KEY NOT NULL,
     bldg_id INTEGER NOT NULL,
     dataset_id INTEGER NOT NULL REFERENCES dataset(id),
@@ -322,7 +322,7 @@ CREATE TABLE metadata (
     UNIQUE (bldg_id, dataset_id, upgrade)
 );
 
-CREATE TABLE timeseries (
+CREATE TABLE IF NOT EXISTS timeseries (
     metadata_id INTEGER NOT NULL REFERENCES metadata(id),
     "timestamp" TEXT,
     bldg_id INTEGER NOT NULL,
@@ -437,13 +437,13 @@ CREATE TABLE timeseries (
     PRIMARY KEY (metadata_id, "timestamp")
 );
 
-CREATE TABLE model (
+CREATE TABLE IF NOT EXISTS model (
     id INTEGER PRIMARY KEY NOT NULL,
     metadata_id INTEGER NOT NULL UNIQUE REFERENCES metadata(id),
     osm TEXT
 );
 
-CREATE TABLE schedule (
+CREATE TABLE IF NOT EXISTS schedule (
     metadata_id INTEGER NOT NULL REFERENCES metadata(id),
     "day" INTEGER NOT NULL,
     hour INTEGER NOT NULL,
@@ -474,7 +474,25 @@ CREATE TABLE schedule (
     PRIMARY KEY (metadata_id, "day", hour, minute)
 );
 
--- views
+-- citylearn tables
+CREATE TABLE IF NOT EXISTS citylearn_energyplus_simulation_result (
+    metadata_id INTEGER NOT NULL REFERENCES metadata(id),
+    "Month" INTEGER NOT NULL,
+    "Hour" INTEGER NOT NULL,
+    "Day Type" TEXT NOT NULL,
+    "Daylight Savings Status" INTEGER NOT NULL,
+    "Indoor Temperature (C)" REAL NOT NULL,
+    "Average Unmet Cooling Setpoint Difference (C)" REAL NOT NULL,
+    "Average Unmet Heating Setpoint Difference (C)" REAL NOT NULL,
+    "Indoor Relative Humidity (%)" REAL NOT NULL,
+    "Equipment Electric Power (kWh)" REAL NOT NULL,
+    "DHW Heating (kWh)" REAL NOT NULL,
+    "Cooling Load (kWh)" REAL NOT NULL,
+    "Heating Load (kWh)" REAL NOT NULL,
+    PRIMARY KEY (metadata_id, "Month", "Hour", "Day Type")
+);
+
+-- x-stock views
 DROP VIEW IF EXISTS building_energy_performance_simulation_input;
 CREATE VIEW building_energy_performance_simulation_input AS
     SELECT
