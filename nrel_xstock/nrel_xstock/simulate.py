@@ -5,7 +5,6 @@ from openstudio import energyplus, osversion
 from nrel_xstock.database import SQLiteDatabase
 from nrel_xstock.utilities import write_data, get_data_from_path
 
-
 class OpenStudioModelEditor:
     def __init__(self,osm):
         self.osm = osm
@@ -137,12 +136,12 @@ class Simulator:
         os.makedirs(self.output_directory,exist_ok=True)
         self.__write_epw()
         run_kwargs = self.__get_run_kwargs(**run_kwargs if run_kwargs is not None else {})
-        idf = IDF(StringIO(self.idf),self.__epw_filepath)
+        idf = self.get_idf_object(weather=self.__epw_filepath) 
         idf.run(**run_kwargs)
         os.remove(self.__epw_filepath)
 
     def __get_run_kwargs(self,**kwargs):
-        idf = IDF(StringIO(self.idf))
+        idf = self.get_idf_object()
         idf_version = idf.idfobjects['version'][0].Version_Identifier.split('.')
         idf_version.extend([0] * (3 - len(idf_version)))
         idf_version_str = '-'.join([str(item) for item in idf_version])
@@ -163,66 +162,8 @@ class Simulator:
         write_data(self.epw,filepath)
         self.__epw_filepath = filepath
 
+    def get_idf_object(self,weather=None):
+        return IDF(StringIO(self.idf),weather)
+
     def preprocess(self):
         raise NotImplementedError
-
-class CityLearnSimulator(Simulator):
-    def __init__(self,idd_filepath,idf,epw,**kwargs):
-        super().__init__(idd_filepath,idf,epw,**kwargs)
-
-    def simulate(self,**run_kwargs):
-        self.preprocess()
-        super().simulate(**run_kwargs)
-
-    def get_simulation_result(self,query_filepath):
-        with open(query_filepath,'r') as f:
-            query = f.read()
-
-        database = SQLiteDatabase(os.path.join(self.output_directory,f'{self.simulation_id}.sql'))
-        data = database.query_table(query)
-        # Parantheses in column names changed to square braces to match CityLearn format
-        # SQLite3 ignores square braces in column names so parentheses used as temporary fix. 
-        data.columns = [c.replace('(','[').replace(')',']') for c in data.columns]
-        return data
-
-    def preprocess(self):
-        idf = IDF(StringIO(self.idf))
-        # *********** update timestep ***********
-        obj = idf.idfobjects['Timestep'][0]
-        obj.Number_of_Timesteps_per_Hour = 1
-
-        # *********** remove energy management system objects ***********
-        # Cannot gurantee that removing these objects will retain the intended building systems
-        # operation and behavior. However, the objects need to be removed in order to avoid simulation
-        # errors when using IdealLoads object.
-        ems_objects = [   
-            'EnergyManagementSystem:Sensor',
-            'EnergyManagementSystem:Actuator',
-            'EnergyManagementSystem:Subroutine',
-            'EnergyManagementSystem:Program',
-            'EnergyManagementSystem:ProgramCallingManager',
-            'EnergyManagementSystem:OutputVariable',
-        ]
-
-        for ems_object in ems_objects:
-            idf.idfobjects[ems_object] = []
-
-        # *********** update output variables ***********
-        output_variables = {
-            'Equipment Electric Power': ['Lights Electricity Energy','Electric Equipment Electricity Energy',],
-            'Indoor Temperature [C]':['Zone Air Temperature',],
-            'Indoor Relative Humidity [%]':['Zone Air Relative Humidity'],
-            'Average Unmet Cooling Setpoint Difference [C]':['Zone Thermostat Cooling Setpoint Temperature'],
-            'Average Unmet Heating Setpoint Difference [C]':['Zone Thermostat Heating Setpoint Temperature'],
-            'DHW Heating [kWh]':['Water Heater Heating Energy'],
-            'Cooling Load [kWh]':['Zone Ideal Loads Zone Total Cooling Energy',],
-            'Heating Load [kWh]':['Zone Ideal Loads Zone Total Heating Energy',],
-        }
-        idf.idfobjects['Output:Variable'] = []
-
-        for _, value in output_variables.items():
-            for output_variable in value:
-                obj = idf.newidfobject('Output:Variable')
-                obj.Variable_Name = output_variable
-
-        self.idf = idf.idfstr()
