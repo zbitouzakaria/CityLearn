@@ -29,8 +29,6 @@ class SQLiteDatabase:
 
     def __validate_query(self,query):
         query = query.replace(',)',')')
-        query = query.replace('\n','')
-        query = query.replace('\r','')
         return query
     
     def build(self,schema_filepath=None,overwrite=False,apply_changes=False):
