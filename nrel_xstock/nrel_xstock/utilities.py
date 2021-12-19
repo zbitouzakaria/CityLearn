@@ -60,10 +60,10 @@ def get_data_from_path(filepath):
 
     return data
 
-def unnest_dict(record,seperator=',',prefix=None):
+def unnest_dict(nested_dict,seperator=',',prefix=None):
     master_unnest = {}
 
-    for key, value in record.items():
+    for key, value in nested_dict.items():
         key = f'{"" if prefix is None else str(prefix)+seperator}{key}'
         if isinstance(value,dict):
             child_unnest = unnest_dict(value,prefix=key)

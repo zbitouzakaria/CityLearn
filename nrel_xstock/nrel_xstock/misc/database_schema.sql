@@ -492,6 +492,18 @@ CREATE TABLE IF NOT EXISTS citylearn_energyplus_simulation_result (
     PRIMARY KEY (metadata_id, "Month", "Hour", "Day Type")
 );
 
+CREATE TABLE IF NOT EXISTS citylearn_building_attributes (
+    metadata_id INTEGER NOT NULL REFERENCES metadata(id),
+    attributes TEXT NOT NULL,
+    PRIMARY KEY (metadata_id)
+);
+
+CREATE TABLE IF NOT EXISTS citylearn_building_state_action_space (
+    metadata_id INTEGER NOT NULL REFERENCES metadata(id),
+    state_action_space TEXT NOT NULL,
+    PRIMARY KEY (metadata_id)
+);
+
 -- x-stock views
 DROP VIEW IF EXISTS building_energy_performance_simulation_input;
 CREATE VIEW building_energy_performance_simulation_input AS

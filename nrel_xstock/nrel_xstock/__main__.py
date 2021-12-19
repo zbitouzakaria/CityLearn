@@ -2,51 +2,11 @@ import argparse
 import inspect
 import os
 import sys
-from nrel_xstock.database import ResstockDatabase, SQLiteDatabase
-from nrel_xstock.simulate import OpenStudioModelEditor, Simulator
+import simplejson as json
+from nrel_xstock.citylearn_xstock import CityLearnSimulator
+from nrel_xstock.database import ResstockDatabase
+from nrel_xstock.simulate import OpenStudioModelEditor
 from nrel_xstock.utilities import read_json
-
-class CityLearnSimulator(Simulator):
-    def __init__(self,idd_filepath,idf,epw,**kwargs):
-        super().__init__(idd_filepath,idf,epw,**kwargs)
-
-    def simulate(self,**run_kwargs):
-        self.preprocess()
-        super().simulate(**run_kwargs)
-
-    def get_simulation_result(self,query_filepath):
-        with open(query_filepath,'r') as f:
-            query = f.read()
-
-        database = SQLiteDatabase(os.path.join(self.output_directory,f'{self.simulation_id}.sql'))
-        data = database.query_table(query)
-        # Parantheses in column names changed to square braces to match CityLearn format
-        # SQLite3 ignores square braces in column names so parentheses used as temporary fix. 
-        data.columns = [c.replace('(','[').replace(')',']') for c in data.columns]
-        return data
-
-    def preprocess(self):
-        idf = self.get_idf_object()
-
-        # *********** update output variables ***********
-        output_variables = {
-            'Equipment Electric Power': ['Lights Electricity Energy','Electric Equipment Electricity Energy',],
-            'Indoor Temperature [C]':['Zone Air Temperature',],
-            'Indoor Relative Humidity [%]':['Zone Air Relative Humidity'],
-            'Average Unmet Cooling Setpoint Difference [C]':['Zone Thermostat Cooling Setpoint Temperature'],
-            'Average Unmet Heating Setpoint Difference [C]':['Zone Thermostat Heating Setpoint Temperature'],
-            'DHW Heating [kWh]':['Water Heater Heating Energy','Water Heater Tank Temperature','Water Heater Water Volume','Water Heater Runtime Fraction'],
-            'Cooling Load [kWh]':['Zone Ideal Loads Zone Total Cooling Energy','Zone Predicted Sensible Load to Setpoint Heat Transfer Rate','Zone Predicted Moisture Load Moisture Transfer Rate',],
-            'Heating Load [kWh]':['Zone Ideal Loads Zone Total Heating Energy',],
-        }
-        idf.idfobjects['Output:Variable'] = []
-
-        for _, value in output_variables.items():
-            for output_variable in value:
-                obj = idf.newidfobject('Output:Variable')
-                obj.Variable_Name = output_variable
-
-        self.idf = idf.idfstr()
 
 def insert(**kwargs):
     filters = read_json(kwargs.pop('filters_filepath')) if kwargs.get('filters_filepath') is not None else None
@@ -65,8 +25,17 @@ def simulate(**kwargs):
     for i, metadata_id in enumerate(metadata_ids):
         print(f'Simulating metadata_id:{metadata_id} ({i+1}/{len(metadata_ids)})')
         # get input data for simulation
-        sim_data = database.query_table(f"SELECT osm, epw FROM building_energy_performance_simulation_input WHERE metadata_id = {metadata_id}")
-        osm, epw = sim_data.to_records(index=False)[0]
+        sim_data = database.query_table(f"""
+            SELECT 
+                i.osm, 
+                i.epw,
+                m.in_pv_system_size
+            FROM building_energy_performance_simulation_input i
+            LEFT JOIN metadata m ON m.id = i.metadata_id
+            WHERE i.metadata_id = {metadata_id}""")
+        osm, epw, pv_system_size = sim_data.to_records(index=False)[0]
+        assert osm is not None, f'osm for metadata_id:{metadata_id} not found.'
+        assert epw is not None, f'epw for metadata_id:{metadata_id} not found.'
         schedules_filepath = 'schedules.csv'
         schedule = database.query_table(f"SELECT * FROM schedule WHERE metadata_id = {metadata_id}")
         schedule = schedule.drop(columns=['metadata_id','day','hour','minute',])
@@ -84,8 +53,13 @@ def simulate(**kwargs):
         simulator.simulate()
         os.remove(schedules_filepath)
         simulation_result = simulator.get_simulation_result(simulation_result_query_filepath)
+        attributes_kwargs = {
+            'Solar_Power_Installed(kW)':float(pv_system_size.split(' ')[0]) if pv_system_size is not None else 0
+        }
+        attributes = simulator.get_attributes(random_seed=metadata_id,**attributes_kwargs)
+        state_action_space = simulator.get_state_action_space(attributes)
         
-        # write
+        # write to database
         simulation_result.columns = [c.replace('[','(').replace(']',')') for c in simulation_result.columns]
         simulation_result['metadata_id'] = metadata_id
         database.insert(
@@ -93,6 +67,18 @@ def simulate(**kwargs):
             simulation_result.columns.tolist(),
             simulation_result.values,
             on_conflict_fields=['metadata_id','Month','Hour', 'Day Type']
+        )
+        database.insert(
+            'citylearn_building_attributes',
+            ['metadata_id','attributes'],
+            [[metadata_id,json.dumps(attributes,ignore_nan=True)]],
+            on_conflict_fields=['metadata_id']
+        )
+        database.insert(
+            'citylearn_building_state_action_space',
+            ['metadata_id','state_action_space'],
+            [[metadata_id,json.dumps(state_action_space,ignore_nan=True)]],
+            on_conflict_fields=['metadata_id']
         )
 
 def main():
