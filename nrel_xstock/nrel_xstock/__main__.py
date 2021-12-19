@@ -7,12 +7,99 @@ from nrel_xstock.simulate import OpenStudioModelEditor, Simulator
 from nrel_xstock.utilities import read_json
 
 class CityLearnSimulator(Simulator):
-    def __init__(self,idd_filepath,idf,epw,**kwargs):
+    def __init__(self,idd_filepath,idf,epw,ems_objects_to_remove=None,**kwargs):
         super().__init__(idd_filepath,idf,epw,**kwargs)
+        self.ems_objects_to_remove = ems_objects_to_remove
+
+    @property
+    def ems_objects_to_remove(self):
+        return self.__ems_objects_to_remove
+
+    @ems_objects_to_remove.setter
+    def ems_objects_to_remove(self,ems_objects_to_remove):
+        self.__ems_objects_to_remove = ems_objects_to_remove if ems_objects_to_remove is not None else {}
 
     def simulate(self,**run_kwargs):
         self.preprocess()
         super().simulate(**run_kwargs)
+        # rerun = True
+
+        # while rerun:
+        #     try:
+        #         rerun = False
+        #         super().simulate(**run_kwargs)
+
+        #     except EnergyPlusRunError as e:
+        #         rerun = self.__find_ems_objects_to_remove()
+                
+        #         if not rerun:
+        #             raise e
+        #         else:
+        #             print('Rerunning simulation after removing EMS objects.')
+
+        # print(self.ems_objects_to_remove)
+        # assert False      
+
+    # def __find_ems_objects_to_remove(self):
+    #     found = False
+    #     filepath = os.path.join(self.output_directory,f'{self.simulation_id}.err')
+    #     errors = get_data_from_path(filepath)
+    #     errors = errors.split('\n')
+    #     errors = [row.strip() for row in errors]
+    #     severe_ixs = [i for i, row in enumerate(errors) if row.startswith('** Severe  **')]
+    #     severe = []
+
+    #     for ix in severe_ixs:
+    #         severe.append(errors[ix])
+
+    #         for i in range(ix+1,len(errors)):
+    #             row = errors[i]
+
+    #             if row.startswith('**   ~~~   **'):
+    #                 severe.append(row)
+    #             else:
+    #                 break
+
+    #     errors = ' '.join(severe)
+    #     errors = errors.split('** Severe  **')
+    #     errors = [row for row in errors if 'EnergyManagementSystem' in row]
+    #     ems_objects = {}
+
+    #     for row in errors:
+    #         contents = row.split(' ')
+    #         obj = [content for content in contents if 'EnergyManagementSystem' in content]
+            
+    #         if len(obj) == 1:
+    #             found = True
+    #             obj = obj[0]
+    #             key, value = obj.split('=')[0], obj.split('=')[-1]
+    #             ems_objects[key] = ems_objects[key] + [value] if key in ems_objects.keys() else [value]
+    #         elif len(obj) == 0:
+    #             continue
+    #         else:
+    #             raise Exception(f'Unidentifiable severe error: {row}')
+
+    #     if found:
+    #         print(ems_objects)
+    #         ems_objects_to_remove = self.ems_objects_to_remove
+    #         idf = self.get_idf_object()
+            
+    #         for key, value in ems_objects.items():
+    #             objects = [obj for obj in idf.idfobjects[key] if obj.Name.upper() in value]
+                
+    #             for obj in objects:
+    #                 idf.removeidfobject(obj)
+
+    #             ems_objects_to_remove[key] = ems_objects_to_remove[key] + value if key in ems_objects_to_remove.keys() else value
+            
+    #         self.ems_objects_to_remove = ems_objects_to_remove
+    #         self.idf = idf.idfstr()
+            
+    #     else:
+    #         pass
+        
+    #     return found
+
 
     def get_simulation_result(self,query_filepath):
         with open(query_filepath,'r') as f:
@@ -28,15 +115,8 @@ class CityLearnSimulator(Simulator):
     def preprocess(self):
         idf = self.get_idf_object()
         # *********** update timestep ***********
-        obj = idf.idfobjects['Timestep'][0]
-        obj.Number_of_Timesteps_per_Hour = 1
-
-        # *********** remove energy management system objects ***********
-        # Cannot gurantee that removing these objects will retain the intended building systems
-        # operation and behavior. However, the objects need to be removed in order to avoid simulation
-        # errors when using IdealLoads object.
-        for ems_object in [obj for obj in set(idf.idfobjects.keys()) if obj.upper().startswith('ENERGYMANAGEMENTSYSTEM')]:
-            idf.idfobjects[ems_object] = []
+        # obj = idf.idfobjects['Timestep'][0]
+        # obj.Number_of_Timesteps_per_Hour = 1
 
         # *********** update output variables ***********
         output_variables = {
@@ -45,8 +125,8 @@ class CityLearnSimulator(Simulator):
             'Indoor Relative Humidity [%]':['Zone Air Relative Humidity'],
             'Average Unmet Cooling Setpoint Difference [C]':['Zone Thermostat Cooling Setpoint Temperature'],
             'Average Unmet Heating Setpoint Difference [C]':['Zone Thermostat Heating Setpoint Temperature'],
-            'DHW Heating [kWh]':['Water Heater Heating Energy'],
-            'Cooling Load [kWh]':['Zone Ideal Loads Zone Total Cooling Energy',],
+            'DHW Heating [kWh]':['Water Heater Heating Energy','Water Heater Tank Temperature','Water Heater Water Volume','Water Heater Runtime Fraction'],
+            'Cooling Load [kWh]':['Zone Ideal Loads Zone Total Cooling Energy','Zone Predicted Sensible Load to Setpoint Heat Transfer Rate','Zone Predicted Moisture Load Moisture Transfer Rate',],
             'Heating Load [kWh]':['Zone Ideal Loads Zone Total Heating Energy',],
         }
         idf.idfobjects['Output:Variable'] = []
@@ -73,11 +153,9 @@ def __simulate(**kwargs):
     simulation_result_query_filepath = os.path.join(os.path.dirname(__file__),'misc/citylearn_simulation_result.sql')
 
     for i, metadata_id in enumerate(metadata_ids):
-        print(f'Simulating: {i+1}/{len(metadata_ids)}')
+        print(f'Simulating metadata_id:{metadata_id} ({i+1}/{len(metadata_ids)})')
         # get input data for simulation
-        sim_data = database.query_table(
-            f"SELECT osm, epw FROM building_energy_performance_simulation_input WHERE metadata_id = {metadata_id}"
-        )
+        sim_data = database.query_table(f"SELECT osm, epw FROM building_energy_performance_simulation_input WHERE metadata_id = {metadata_id}")
         osm, epw = sim_data.to_records(index=False)[0]
         schedules_filepath = 'schedules.csv'
         schedule = database.query_table(f"SELECT * FROM schedule WHERE metadata_id = {metadata_id}")
@@ -88,7 +166,6 @@ def __simulate(**kwargs):
         
         # preprocess osm as needed and translate to idf
         osm_editor = OpenStudioModelEditor(osm)
-        osm_editor.use_ideal_loads_air_system()
         idf = osm_editor.forward_translate()
         simulator = CityLearnSimulator(idd_filepath,idf,epw,simulation_id=metadata_id,output_directory=output_directory)
         simulator.preprocess()

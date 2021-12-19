@@ -104,14 +104,26 @@ WITH zone_conditioning AS (
     SELECT
         r.TimeIndex,
         r.ReportDataDictionaryIndex,
-        'thermal_load' AS label,
-        r.Value AS "value"
+        'cooling_load' AS label,
+        CASE
+            WHEN r.Value > 0 THEN 0
+            ELSE ABS(r.Value)
+        END  AS "value"
     FROM ReportData r
     INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = r.ReportDataDictionaryIndex
-    WHERE d.Name IN (
-        'Zone Ideal Loads Zone Total Cooling Energy',
-        'Zone Ideal Loads Zone Total Heating Energy'
-    )
+    WHERE d.Name = 'Zone Predicted Sensible Load to Setpoint Heat Transfer Rate'
+    UNION
+    SELECT
+        r.TimeIndex,
+        r.ReportDataDictionaryIndex,
+        'heating_load' AS label,
+        CASE
+            WHEN r.Value < 0 THEN 0
+            ELSE ABS(r.Value)
+        END  AS "value"
+    FROM ReportData r
+    INNER JOIN ReportDataDictionary d ON d.ReportDataDictionaryIndex = r.ReportDataDictionaryIndex
+    WHERE d.Name = 'Zone Predicted Sensible Load to Setpoint Heat Transfer Rate'
 
 ), "aggregate" AS (
     -- sum the variables per timestamp
@@ -139,8 +151,8 @@ WITH zone_conditioning AS (
         ) AS "Average Unmet Heating Setpoint Difference (C)",
         SUM(CASE WHEN a.Name = 'Zone Air Relative Humidity' THEN a.value END) AS "Indoor Relative Humidity (%)",
         SUM(CASE WHEN a.Name = 'Water Heater Heating Energy' THEN (a.value/3600)/1000 END) AS "DHW Heating (kWh)",
-        SUM(CASE WHEN a.Name = 'Zone Ideal Loads Zone Total Cooling Energy' THEN a.value/1000 END) AS "Cooling Load (kWh)",
-        SUM(CASE WHEN a.Name = 'Zone Ideal Loads Zone Total Heating Energy' THEN a.value/1000 END) AS "Heating Load (kWh)",
+        SUM(CASE WHEN a.label = 'cooling_load' THEN a.value/1000 END) AS "Cooling Load (kWh)",
+        SUM(CASE WHEN a.label = 'heating_load' THEN a.value/1000 END) AS "Heating Load (kWh)",
         SUM(CASE WHEN a.Name = 'Zone Thermostat Cooling Setpoint Temperature' THEN a.value END) AS "Cooling Setpoint",
         SUM(CASE WHEN a.Name = 'Zone Thermostat Heating Setpoint Temperature' THEN a.value END) AS "Heating Setpoint",
         SUM(CASE WHEN a.Name IN (
