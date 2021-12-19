@@ -135,6 +135,7 @@ class Simulator:
     def simulate(self,**run_kwargs):
         os.makedirs(self.output_directory,exist_ok=True)
         self.__write_epw()
+        self.__write_idf()
         run_kwargs = self.__get_run_kwargs(**run_kwargs if run_kwargs is not None else {})
         idf = self.get_idf_object(weather=self.__epw_filepath) 
         idf.run(**run_kwargs)
@@ -161,6 +162,10 @@ class Simulator:
         filepath = os.path.join(self.output_directory,'weather.epw')
         write_data(self.epw,filepath)
         self.__epw_filepath = filepath
+
+    def __write_idf(self):
+        filepath = os.path.join(self.output_directory,f'{self.simulation_id}.idf')
+        write_data(self.idf,filepath)
 
     def get_idf_object(self,weather=None):
         return IDF(StringIO(self.idf),weather)
