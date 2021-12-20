@@ -9,8 +9,8 @@ INSERT_FILTERS_FILEPATH="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_L
 SIMULATE_ENERGYPLUS_PARAMETERS_FILEPATH="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/CityLearn/nrel_xstock/data/neighborhoods/austin_neighborhood.csv"
 IDD_FILEPATH="/Applications/EnergyPlus-9-6-0/PreProcess/IDFVersionUpdater/V9-6-0-Energy+.idd"
 SIMULATE_ENERGYPLUS_ROOT_OUTPUT_DIRECTORY="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/data/nrel/energyplus_simulation"
-NEIGHBORHOOD_FILEPATH=$SIMULATE_ENERGYPLUS_PARAMETERS_FILEPATH
-CITYLEARN_INPUT_OUTPUT_DIRECTORY="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/data/nrel/citylearn_input/"
+CITYLEARN_ENVIRONMENT_NEIGHBORHOOD_FILEPATH=$SIMULATE_ENERGYPLUS_PARAMETERS_FILEPATH
+CITYLEARN_ENVIRONMENT_OUTPUT_DIRECTORY="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/data/nrel/citylearn_environment/"
 
 # INITIALIZE DATABASE
 python -m nrel_xstock $DATABASE_FILEPATH initialize -a || exit 1
@@ -31,4 +31,4 @@ IFS=','
 IFS=$OLDIFS
 
 # GET CITYLEARN INPUT DATA
-python -m nrel_xstock $DATABASE_FILEPATH citylearn_simulation_input $NEIGHBORHOOD_FILEPATH -o $CITYLEARN_INPUT_OUTPUT_DIRECTORY
+python -m nrel_xstock $DATABASE_FILEPATH citylearn_environment $CITYLEARN_ENVIRONMENT_NEIGHBORHOOD_FILEPATH -o $CITYLEARN_ENVIRONMENT_OUTPUT_DIRECTORY

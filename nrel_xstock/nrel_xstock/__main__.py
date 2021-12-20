@@ -38,10 +38,10 @@ def main():
     subparser_simulate_energyplus.set_defaults(func=CityLearnNRELXStock.simulate_energyplus)
 
     # citylearn simulation input
-    subparser_citylearn_simulation_input = subparsers.add_parser('citylearn_simulation_input',description='Database dataset operations.')
-    subparser_citylearn_simulation_input.add_argument('neighborhood_filepath',type=str,help='Neighborhood filepath.')
-    subparser_citylearn_simulation_input.add_argument('-o','--output_directory',type=str,dest='output_directory',help='Directory to output to.')
-    subparser_citylearn_simulation_input.set_defaults(func=CityLearnNRELXStock.get_citylearn_simulation_input)
+    subparser_citylearn_environment = subparsers.add_parser('citylearn_environment',description='Get CityLearn environment from XStock.')
+    subparser_citylearn_environment.add_argument('neighborhood_filepath',type=str,help='Neighborhood filepath.')
+    subparser_citylearn_environment.add_argument('-o','--output_directory',type=str,dest='output_directory',help='Directory to output to.')
+    subparser_citylearn_environment.set_defaults(func=CityLearnNRELXStock.get_citylearn_environment)
 
     args = parser.parse_args()
     arg_spec = inspect.getfullargspec(args.func)

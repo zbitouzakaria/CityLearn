@@ -195,7 +195,7 @@ class CityLearnNRELXStock:
         )
 
     @staticmethod
-    def get_citylearn_simulation_input(**kwargs):
+    def get_citylearn_environment(**kwargs):
         database = XStockDatabase(kwargs.pop('filepath'))
         neighborhood = pd.read_csv(kwargs['neighborhood_filepath'])
         output_directory = kwargs.get('output_directory','')
