@@ -152,7 +152,7 @@ class SQLiteDatabase:
         sqlite3.register_adapter(np.int32,lambda x: int(x))
         sqlite3.register_adapter(np.datetime64,lambda x: np.datetime_as_string(x,unit='s').replace('T',' '))
 
-class ResstockDatabase(SQLiteDatabase):
+class XStockDatabase(SQLiteDatabase):
     __ROOT_URL = 'https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/'
 
     def __init__(self,filepath,overwrite=False,apply_changes=False):
@@ -215,7 +215,7 @@ class ResstockDatabase(SQLiteDatabase):
         return dataset_id
 
     def __update_data_dictionary_table(self,dataset,dataset_id):
-        data = ResstockDatabase.__download(key='data_dictionary',**dataset)
+        data = XStockDatabase.__download(key='data_dictionary',**dataset)
         data.columns = [c.replace('.','_').lower() for c in data.columns]
         data['dataset_id'] = dataset_id
         self.insert(
@@ -226,7 +226,7 @@ class ResstockDatabase(SQLiteDatabase):
         )
 
     def __update_metadata_table(self,dataset,dataset_id,filters=None):
-        data = ResstockDatabase.__download(key='metadata',**dataset)
+        data = XStockDatabase.__download(key='metadata',**dataset)
         data = data.reset_index(drop=False)
 
         if filters is not None:
@@ -268,7 +268,7 @@ class ResstockDatabase(SQLiteDatabase):
             return None
 
     def __update_upgrade_table(self,dataset,dataset_id,upgrade_ids):
-        data = ResstockDatabase.__download(key='upgrade_dictionary',**dataset)
+        data = XStockDatabase.__download(key='upgrade_dictionary',**dataset)
         data['dataset_id'] = dataset_id
         data.columns = [c.replace('.','_').lower() for c in data.columns]
         data = data[data['upgrade_id'].isin(upgrade_ids)].copy()
@@ -284,7 +284,7 @@ class ResstockDatabase(SQLiteDatabase):
             pass
 
     def __update_spatial_tract_table(self,dataset,dataset_id,buildings):
-        data = ResstockDatabase.__download(key='spatial_tract',**dataset)
+        data = XStockDatabase.__download(key='spatial_tract',**dataset)
         data['dataset_id'] = dataset_id
         columns = ['in_nhgis_county_gisjoin','in_nhgis_puma_gisjoin']
         buildings = buildings.groupby(columns).size()
@@ -370,7 +370,7 @@ class ResstockDatabase(SQLiteDatabase):
         
     def __update_timeseries_table(self,dataset,buildings):
         buildings = buildings[['bldg_id','metadata_id','county','upgrade']].to_records(index=False)
-        dataset_url = ResstockDatabase.__get_dataset_url(**dataset)
+        dataset_url = XStockDatabase.__get_dataset_url(**dataset)
 
         for (bldg_id, metadata_id, county, upgrade) in buildings:
             building_path = f'timeseries_individual_buildings/by_county/upgrade={upgrade}/county={county}/{bldg_id}-{upgrade}.parquet'
@@ -388,7 +388,7 @@ class ResstockDatabase(SQLiteDatabase):
 
     def __update_model_table(self,dataset,buildings):
         buildings = buildings[['bldg_id','metadata_id','upgrade']].to_records(index=False)
-        dataset_url = ResstockDatabase.__get_dataset_url(**dataset)
+        dataset_url = XStockDatabase.__get_dataset_url(**dataset)
         values = []
 
         for (bldg_id,metadata_id,upgrade) in buildings:
@@ -446,7 +446,7 @@ class ResstockDatabase(SQLiteDatabase):
     @classmethod
     def __get_dataset_url(cls,dataset_type,weather_data,year_of_publication,release):
         dataset_path = f'{year_of_publication}/{dataset_type}_{weather_data}_release_{release}/'
-        return os.path.join(ResstockDatabase.__ROOT_URL,dataset_path)
+        return os.path.join(XStockDatabase.__ROOT_URL,dataset_path)
     
     @classmethod
     def __downloader(cls):
