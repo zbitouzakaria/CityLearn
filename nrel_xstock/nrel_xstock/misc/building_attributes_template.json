@@ -1,7 +1,7 @@
 {
     "File_Name":null,
     "File_Name_Solar_Profile":"solar_generation_1kW.csv",
-    "Building_Type":1,
+    "Building_Type":null,
     "Climate_Zone":null,
     "Solar_Power_Installed(kW)": 0.4,
     "Heat_Pump":{

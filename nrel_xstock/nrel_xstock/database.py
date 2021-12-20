@@ -30,21 +30,6 @@ class SQLiteDatabase:
     def __validate_query(self,query):
         query = query.replace(',)',')')
         return query
-    
-    def build(self,schema_filepath=None,overwrite=False,apply_changes=False):
-        schema_filepath = os.path.join(os.path.dirname(__file__),'.misc/schema.sql') if schema_filepath is None else schema_filepath
-
-        if os.path.isfile(self.filepath):
-            if overwrite:
-                os.remove(self.filepath)
-            elif not apply_changes:
-                return
-            else:
-                pass
-        else:
-            pass
-
-        self.execute_sql_from_file(schema_filepath)
 
     def get_table(self,table_name):
         query = f"SELECT * FROM {table_name}"
@@ -170,12 +155,24 @@ class SQLiteDatabase:
 class ResstockDatabase(SQLiteDatabase):
     __ROOT_URL = 'https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/'
 
-    def __init__(self,filepath):
+    def __init__(self,filepath,overwrite=False,apply_changes=False):
         super().__init__(filepath)
+        self.__build(overwrite,apply_changes)
 
-    def build(self,overwrite=False,apply_changes=False):
+    def __build(self,overwrite,apply_changes):
         schema_filepath = os.path.join(os.path.dirname(__file__),'misc/database_schema.sql')
-        super().build(schema_filepath,overwrite=overwrite,apply_changes=apply_changes)
+        
+        if os.path.isfile(self.filepath):
+            if overwrite:
+                os.remove(self.filepath)
+            elif not apply_changes:
+                return
+            else:
+                pass
+        else:
+            pass
+
+        self.execute_sql_from_file(schema_filepath)
 
     def insert_dataset(self,dataset_type,weather_data,year_of_publication,release,filters):
         dataset = {

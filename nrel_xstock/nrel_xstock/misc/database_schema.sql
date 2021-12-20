@@ -509,12 +509,17 @@ DROP VIEW IF EXISTS building_energy_performance_simulation_input;
 CREATE VIEW building_energy_performance_simulation_input AS
     SELECT
         m.id AS metadata_id,
+        d.dataset_type,
+        d.weather_data AS dataset_weather_data,
+        d.year_of_publication AS dataset_year_of_publication,
+        d.release AS dataset_release,
         m.bldg_id,
-        d.osm,
-        w.epw,
-        w.ddy
+        m.upgrade AS bldg_upgrade,
+        e.osm AS bldg_osm,
+        w.epw AS bldg_epw
     FROM metadata m
-    INNER JOIN model d ON d.metadata_id = m.id
+    INNER JOIN dataset d ON d.id = m.dataset_id
+    INNER JOIN model e ON e.metadata_id = m.id
     INNER JOIN weather w ON
         w.dataset_id = m.dataset_id
         AND w.weather_file_tmy3 = m.in_weather_file_tmy3
