@@ -138,7 +138,6 @@ class Simulator:
         run_kwargs = self.__get_run_kwargs(**run_kwargs if run_kwargs is not None else {})
         idf = self.get_idf_object(weather=self.__epw_filepath) 
         idf.run(**run_kwargs)
-        os.remove(self.__epw_filepath)
 
     def __get_run_kwargs(self,**kwargs):
         idf = self.get_idf_object()

@@ -4,7 +4,7 @@ import pandas as pd
 import simplejson as json
 from nrel_xstock.database import SQLiteDatabase, XStockDatabase
 from nrel_xstock.simulate import OpenStudioModelEditor, Simulator
-from nrel_xstock.utilities import read_json, write_json
+from nrel_xstock.utilities import read_json, write_data, write_json
 
 class CityLearnSimulator(Simulator):
     def __init__(self,idd_filepath,idf,epw,**kwargs):
@@ -150,20 +150,22 @@ class CityLearnNRELXStock:
         print(f'Simulating: {simulation_id}')
         assert simulation_data['osm'] is not None, f'osm not found.'
         assert simulation_data['epw'] is not None, f'epw not found.'
-        schedules_filepath = 'schedules.csv'
-        schedule = database.query_table(f"""SELECT * FROM schedule WHERE metadata_id = {simulation_data['metadata_id']}""")
-        schedule = schedule.drop(columns=['metadata_id','day','hour','minute',])
-        schedule.to_csv(schedules_filepath,index=False)
         output_directory = f'output_{simulation_id}'
         output_directory = os.path.join(root_output_directory,output_directory) if root_output_directory is not None else output_directory
-            
+        schedules_filename = 'schedules.csv'
+        schedule = database.query_table(f"""SELECT * FROM schedule WHERE metadata_id = {simulation_data['metadata_id']}""")
+        schedule = schedule.drop(columns=['metadata_id','day','hour','minute',])
+        schedule.to_csv(schedules_filename,index=False)
+        schedule.to_csv(os.path.join(output_directory,schedules_filename),index=False) # also store to output directory
+         
         # simulate
         osm_editor = OpenStudioModelEditor(simulation_data['osm'])
         idf = osm_editor.forward_translate()
+        write_data(simulation_data['osm'],os.path.join(output_directory,f'{simulation_id}.osm'))
         simulator = CityLearnSimulator(idd_filepath,idf,simulation_data['epw'],simulation_id=simulation_id,output_directory=output_directory)
         simulator.preprocess()
         simulator.simulate()
-        os.remove(schedules_filepath)
+        os.remove(schedules_filename)
         simulation_result = simulator.get_simulation_result(simulation_result_query_filepath)
         attributes = simulator.get_attributes(random_seed=simulation_id)
         attributes['File_Name'] = f'Building_{simulation_id}.csv'
@@ -210,6 +212,7 @@ class CityLearnNRELXStock:
             m.upgrade,
             m.in_ashrae_iecc_climate_zone_2004 AS climate_zone,
             w.id AS weather_id,
+            w.epw,
             w.weather_file_tmy3,
             a.attributes,
             s.state_action_space,
@@ -257,3 +260,5 @@ class CityLearnNRELXStock:
             simulation_result = database.query_table(query).drop(columns=['metadata_id'])
             simulation_result.columns = [c.replace('(','[').replace(')',']') for c in simulation_result.columns]
             simulation_result.to_csv(os.path.join(output_directory,building_attributes[simulation_id]['File_Name']),index=False)
+
+        write_data(data['epw'].iloc[0],os.path.join(output_directory,'weather.epw'))
