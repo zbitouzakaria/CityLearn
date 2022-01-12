@@ -6,11 +6,11 @@ INSERT_WEATHER_DATA="tmy3"
 INSERT_YEAR_OF_PUBLICATION="2021"
 INSERT_RELEASE="1"
 INSERT_FILTERS_FILEPATH="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/CityLearn/nrel_xstock/data/insert_filters.json"
-SIMULATE_ENERGYPLUS_PARAMETERS_FILEPATH="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/CityLearn/nrel_xstock/data/neighborhoods/austin_neighborhood.csv"
+SIMULATE_ENERGYPLUS_PARAMETERS_FILEPATH="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/CityLearn/nrel_xstock/data/neighborhoods/austin/austin_neighborhood.csv"
 IDD_FILEPATH="/Applications/EnergyPlus-9-6-0/PreProcess/IDFVersionUpdater/V9-6-0-Energy+.idd"
 SIMULATE_ENERGYPLUS_ROOT_OUTPUT_DIRECTORY="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/data/nrel/energyplus_simulation"
 CITYLEARN_ENVIRONMENT_NEIGHBORHOOD_FILEPATH=$SIMULATE_ENERGYPLUS_PARAMETERS_FILEPATH
-CITYLEARN_ENVIRONMENT_OUTPUT_DIRECTORY="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/data/nrel/citylearn_environment/"
+CITYLEARN_ENVIRONMENT_OUTPUT_DIRECTORY="/Users/kingsleyenweye/Desktop/INTELLIGENT_ENVIRONMENT_LAB/citylearn/CityLearn/nrel_xstock/data/neighborhoods/austin/citylearn_environment/"
 
 # INITIALIZE DATABASE
 python -m nrel_xstock $DATABASE_FILEPATH initialize -a || exit 1

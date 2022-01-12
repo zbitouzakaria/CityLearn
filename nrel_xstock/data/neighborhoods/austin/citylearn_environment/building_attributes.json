@@ -1,0 +1,6802 @@
+{
+  "Building_resstock_tmy3_2021_release_1_40_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_40_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.25514433010675674,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.930244170498071
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003295798230081682
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005382091962807849
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_209_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_209_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.29828536866276634,
+      "t_target_heating": 49,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9119857934615262
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004650963441596177
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0025469339733197103
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_384_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_384_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20307873156407485,
+      "t_target_heating": 49,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9847825755114832
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0052417158489287494
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008974032477987063
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_478_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_478_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2959697386248566,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9332409307517076
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005191997046101627
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006153986075622267
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_637_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_637_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2204145306127507,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9663961707939709
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0021926337982863197
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008616254922698328
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_1386_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_1386_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2440009816913531,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9550158447806842
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00704455385924903
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00794544828890649
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_1440_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_1440_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2372724636807513,
+      "t_target_heating": 48,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9805785999242235
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002216621609854964
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0034169370852286376
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_2001_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_2001_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2119523455203651,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9618895137684527
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0021163225629819574
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008746486282426308
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_3615_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_3615_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2256978363382439,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9485480968834263
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0041588842739408395
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006096784463746744
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_3987_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_3987_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2356254214895693,
+      "t_target_heating": 47,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9529584141050323
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00567240124021132
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0032410240415230423
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_4997_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_4997_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20115926266548237,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9532332330020135
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005541001193864201
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007734680629836123
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_5162_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_5162_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2822852091964519,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9433992724846965
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007472997582407818
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007018821016303905
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_5240_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_5240_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.29665858592592154,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9886737029887207
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0051317938068234405
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008309881345036133
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_5447_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_5447_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2936951778039222,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9885514974857905
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007966075685998525
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0034536530033700925
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_6821_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_6821_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2544791538662601,
+      "t_target_heating": 49,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.946651846240386
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008141030890756192
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00904227348403924
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_6887_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_6887_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 9.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2112350431679463,
+      "t_target_heating": 49,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.912920505774421
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005341284606593019
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002705743567252406
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_7111_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_7111_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2544053690188964,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9977226953546887
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0030389212567748275
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005993672927459352
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_7128_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_7128_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2793894404850814,
+      "t_target_heating": 47,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9915957308959547
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008689701189480618
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008803426772808567
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_7895_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_7895_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2710608687999138,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9361091129268168
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0022050693192495253
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006483336492980736
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_9588_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_9588_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2575728405346563,
+      "t_target_heating": 47,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9952422177786782
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009200270104728382
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006310505684106119
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_10755_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_10755_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2786228863624759,
+      "t_target_heating": 47,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9153880542482115
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009216103257855296
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0022647666439208018
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_11281_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_11281_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.28281407000189474,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9950360013565716
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0034404015327988164
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0021098453062548595
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_11476_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_11476_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.25147880190768124,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9310329997710618
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009834394465033357
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0060299408904187736
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_11696_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_11696_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.23916214232976576,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9020645670630413
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002453106232763849
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0036387727918016236
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_13115_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_13115_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22371721183655505,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.941481736157079
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007327390689524552
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0037964561263813743
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_13181_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_13181_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2715769119397377,
+      "t_target_heating": 49,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9586326660183776
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006163708352284201
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0026315404248778416
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_15429_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_15429_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24509846989764514,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9579406406449927
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008844574797198888
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008801592103804459
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_15942_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_15942_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20857551368876512,
+      "t_target_heating": 47,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9910827025082564
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006052438841153387
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0024491507319033285
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_16203_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_16203_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.28125898461199,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9267084675853898
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0041916104505849636
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009745566152522908
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_16235_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_16235_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.28872358773045825,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9341730640668593
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006265704938052118
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0038159897488361408
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_16607_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_16607_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2592947979239597,
+      "t_target_heating": 49,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9096052882385259
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003776797135181001
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007063010826274103
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_18098_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_18098_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2612773375955884,
+      "t_target_heating": 49,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9108936463304337
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0047048150516397925
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005822186496617692
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_18751_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_18751_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.21862283558799028,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9596790755076774
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008137380132867897
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0021585682497027563
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_19914_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_19914_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.29961393260555347,
+      "t_target_heating": 48,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9487240709858645
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00415083645764462
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0024469597963571034
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_20687_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_20687_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2579166057359348,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9766521131475909
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00484165141647486
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00479412740653176
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_21264_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_21264_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2201682354699087,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.975027920158233
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0040647342807059285
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008463995719282792
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_21356_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_21356_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22223839380894364,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9179032208341529
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00761413941617497
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002248688846235245
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_21770_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_21770_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.23186264276391508,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9965479797385308
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007530729582637455
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004877917508708171
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_22616_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_22616_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.21234768247768063,
+      "t_target_heating": 50,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9959613029812933
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006910479737102338
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009965104853839918
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_23437_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_23437_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2243385557034922,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9498562247692817
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00799131137920273
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005378230921337039
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_23854_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_23854_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2346243070388312,
+      "t_target_heating": 48,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9794373666461723
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009310389438466472
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00944366644615775
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_24194_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_24194_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22034814321273483,
+      "t_target_heating": 48,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9057316649753101
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005121598747708743
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0071147464912366945
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_24271_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_24271_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2984304920858176,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9411010990653481
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003944291199472478
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0039762341391408156
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_25610_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_25610_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.261196202327895,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9239148073830857
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0063859167854997245
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005991270812983439
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_25646_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_25646_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2759682098680191,
+      "t_target_heating": 49,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9962092705585933
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004640276920068617
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00966647850621032
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_26812_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_26812_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.23727317869632938,
+      "t_target_heating": 47,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9675200980190675
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007259514993729887
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006340456319802728
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_26899_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_26899_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22777626988568825,
+      "t_target_heating": 49,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9055597090836202
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009595418208722846
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006046138042219565
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_26931_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_26931_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2784016163503177,
+      "t_target_heating": 49,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.983515311046258
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003571850288166905
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006664841297358564
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_27020_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_27020_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2330436313914289,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9194724420859923
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002477298848093726
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0075622761201196076
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_28737_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_28737_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.27299266344530465,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9340016051069048
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007074799873427667
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002714442429532956
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_28995_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_28995_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2329128472016453,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9381232512715764
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0036013640287097404
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007900282413946679
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_29370_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_29370_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2492302853471252,
+      "t_target_heating": 47,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9709617980963706
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008045817558537678
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0023691097046240383
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_29507_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_29507_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2503585336773563,
+      "t_target_heating": 49,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.924716040487203
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006989731245730656
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007482535393051151
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_30223_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_30223_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22410756757539463,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9665580211598339
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009364288330460938
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005293315546295727
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_31139_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_31139_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20355983987899123,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.987045500534378
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0030012265954245214
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008603560396779526
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_32434_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_32434_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2646838198100542,
+      "t_target_heating": 50,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.917459550059637
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009329638157857954
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006836488214337616
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_33548_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_33548_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2855928615701,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9808073473480726
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008380652804887784
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005617787714768731
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_33779_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_33779_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20505375261911404,
+      "t_target_heating": 49,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9442062306359874
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009383642107564923
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00850666807224867
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_33885_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_33885_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22205260098357385,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.98005701923804
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004908157651547115
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0022482787590722116
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_34239_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_34239_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2967304992962053,
+      "t_target_heating": 48,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9482131468759424
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0022978790289815585
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007545223262915565
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_34375_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_34375_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.28614428956130245,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9856594571365972
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00582328198782135
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007373590596165759
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_34532_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_34532_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20390887609208647,
+      "t_target_heating": 49,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9197699135247672
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006937185627779639
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004215587614125624
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_34811_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_34811_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.21782997430351617,
+      "t_target_heating": 49,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.962557769496009
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003146010503987321
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008030989823892571
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_34873_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_34873_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2854314580161451,
+      "t_target_heating": 48,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9676238013163118
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009430882151364929
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008421150319857719
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_36217_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_36217_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.21603681220622367,
+      "t_target_heating": 47,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.917100452026809
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00640530449893538
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004517759157682778
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_36456_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_36456_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24665876358700053,
+      "t_target_heating": 49,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.950722605130697
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006884549520981508
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00771812759183553
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_36587_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_36587_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2706558248599162,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9612846150817809
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003641558978939046
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0037313678572749743
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_36642_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_36642_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2566535105055326,
+      "t_target_heating": 50,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9970124826902546
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005519497800467352
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00601014751372794
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_36959_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_36959_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.233875698338093,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9865094440133572
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007038594863029248
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007132896880943089
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_38402_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_38402_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22941663113619656,
+      "t_target_heating": 47,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9551819776233726
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008807151739023529
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005372139753100745
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_38817_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_38817_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2098650778081991,
+      "t_target_heating": 48,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.95026748121633
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009179722968374718
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007141867190434058
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_39610_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_39610_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.26695274745209174,
+      "t_target_heating": 47,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9850641778984837
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004345434367278909
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008332479801616909
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_40929_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_40929_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.20680600603772537,
+      "t_target_heating": 48,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9778757050913539
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0050868528442799404
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006090179217817885
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_41091_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_41091_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2915551216300315,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9886647308792603
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0095520383701142
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004500747237230726
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_41207_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_41207_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2229902636071101,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9143365692377321
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003203514595710626
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004386571161706536
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_42644_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_42644_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.277749507668952,
+      "t_target_heating": 50,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9590304715157927
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009039593726532756
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00938661441098812
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_42890_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_42890_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2269385879443665,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9458939949627116
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005213351154837172
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0054864978350441015
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_43045_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_43045_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.29879844452509463,
+      "t_target_heating": 48,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9298448239818186
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00465683901168279
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0020689551066043936
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_63550_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_63550_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24829996663738446,
+      "t_target_heating": 48,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.989579032081174
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00736190682595414
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008702859123531491
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_117320_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_117320_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.26923187082340194,
+      "t_target_heating": 49,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9089706048513727
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0043009284929750105
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005586050366666319
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_128193_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_128193_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.23466897547845172,
+      "t_target_heating": 49,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9075553822419943
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0031731631015486732
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002672677100744567
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_135664_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_135664_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.21199953786453468,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9323038235660431
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006294216698745528
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004957107577905119
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_169345_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_169345_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2732253525335475,
+      "t_target_heating": 48,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.931010933271246
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003116461718724571
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003542678482159418
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_191067_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_191067_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 3.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.23079065625928613,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9840083332939187
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005385896088879074
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00465151741420998
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_196307_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_196307_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2164494798630956,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9306503088874611
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009261574158851826
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006055936585193658
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_208209_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_208209_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2247820362319431,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9834326215151947
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00432093590151682
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0038311504691085447
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_229476_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_229476_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2972098437225503,
+      "t_target_heating": 49,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.932361344034209
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0029667898701882934
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0020754622634069353
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_287919_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_287919_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22473990108994482,
+      "t_target_heating": 48,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9934286961941287
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004001132745025173
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009906098205607857
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_330868_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_330868_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2474684172027259,
+      "t_target_heating": 50,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9908622682491056
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009554612028664285
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.00731560493570717
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_340590_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_340590_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 3.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.29781187839899026,
+      "t_target_heating": 50,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9690067130729909
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0032208720044618923
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004351575123178598
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_378790_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_378790_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 11.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24385807260103062,
+      "t_target_heating": 50,
+      "t_target_cooling": 7
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9823934503131204
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004020224570420548
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0020749659320786025
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_392184_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_392184_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.22212735691576904,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9395818482746034
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002255802885450696
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009653342725929374
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_404350_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_404350_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 13.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.27500094999738767,
+      "t_target_heating": 48,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9274930244020444
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0037900656998529386
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.004236920133808615
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_415204_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_415204_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24674118519444388,
+      "t_target_heating": 50,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9062276691965915
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0021156203831424643
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008031904944702434
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_446460_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_446460_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 1.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24138942911207334,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9482318390698086
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.0034419265726929275
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.002288463286847321
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_470676_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_470676_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2538309325040928,
+      "t_target_heating": 49,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9767902819215072
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.003195288805471457
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009092193768281052
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_474782_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_474782_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 9.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.23295099130002234,
+      "t_target_heating": 50,
+      "t_target_cooling": 9
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9140599031140192
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008287232242016579
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008834134963981836
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_513235_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_513235_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.24226924811481573,
+      "t_target_heating": 47,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9893457186689726
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.009792552317714639
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006321329869403149
+    },
+    "Battery": {
+      "capacity": 27.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_521981_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_521981_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 7.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.25306406594449626,
+      "t_target_heating": 50,
+      "t_target_cooling": 8
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.9297492422755484
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.006727150055850125
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.008929768365942631
+    },
+    "Battery": {
+      "capacity": 0.0,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  "Building_resstock_tmy3_2021_release_1_549222_0": {
+    "File_Name": "Building_resstock_tmy3_2021_release_1_549222_0.csv",
+    "File_Name_Solar_Profile": "solar_generation_1kW.csv",
+    "Building_Type": null,
+    "Climate_Zone": "2A",
+    "Solar_Power_Installed(kW)": 5.0,
+    "Heat_Pump": {
+      "nominal_power": "autosize",
+      "technical_efficiency": 0.2016968147674949,
+      "t_target_heating": 48,
+      "t_target_cooling": 10
+    },
+    "Electric_Water_Heater": {
+      "nominal_power": "autosize",
+      "efficiency": 0.920817072034576
+    },
+    "Chilled_Water_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.007398921677121389
+    },
+    "DHW_Tank": {
+      "capacity": 2,
+      "loss_coefficient": 0.005067681234931383
+    },
+    "Battery": {
+      "capacity": 13.5,
+      "efficiency": 0.9,
+      "capacity_loss_coefficient": 1e-05,
+      "loss_coefficient": 0,
+      "nominal_power": 5,
+      "power_efficiency_curve": [
+        [
+          0,
+          0.83
+        ],
+        [
+          0.3,
+          0.83
+        ],
+        [
+          0.7,
+          0.9
+        ],
+        [
+          0.8,
+          0.9
+        ],
+        [
+          1,
+          0.85
+        ]
+      ],
+      "capacity_power_curve": [
+        [
+          0.0,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1.0,
+          0.2
+        ]
+      ]
+    }
+  }
+}
