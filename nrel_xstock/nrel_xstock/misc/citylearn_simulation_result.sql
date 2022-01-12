@@ -166,7 +166,9 @@ WITH zone_conditioning AS (
 -- define time-related columns
 SELECT
     t.Month,
+    t.Day,
     t.Hour,
+    t.Minute,
     CASE
         WHEN t.DayType = 'Monday' THEN 1
         WHEN t.DayType = 'Tuesday' THEN 2

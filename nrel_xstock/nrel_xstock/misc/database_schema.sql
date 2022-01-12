@@ -478,7 +478,9 @@ CREATE TABLE IF NOT EXISTS schedule (
 CREATE TABLE IF NOT EXISTS citylearn_energyplus_simulation_result (
     metadata_id INTEGER NOT NULL REFERENCES metadata(id),
     "Month" INTEGER NOT NULL,
+    "Day" INTEGER NOT NULL,
     "Hour" INTEGER NOT NULL,
+    "Minute" INTEGER NOT NULL,
     "Day Type" TEXT NOT NULL,
     "Daylight Savings Status" INTEGER NOT NULL,
     "Indoor Temperature (C)" REAL NOT NULL,
@@ -489,7 +491,7 @@ CREATE TABLE IF NOT EXISTS citylearn_energyplus_simulation_result (
     "DHW Heating (kWh)" REAL NOT NULL,
     "Cooling Load (kWh)" REAL NOT NULL,
     "Heating Load (kWh)" REAL NOT NULL,
-    PRIMARY KEY (metadata_id, "Month", "Hour", "Day Type")
+    PRIMARY KEY (metadata_id, "Month", "Day", "Hour", "Minute")
 );
 
 CREATE TABLE IF NOT EXISTS citylearn_building_attributes (

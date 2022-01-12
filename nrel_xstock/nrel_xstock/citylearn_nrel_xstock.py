@@ -13,7 +13,9 @@ class CityLearnSimulator(Simulator):
     def __get_simulation_result_metadata(self):
         return {
             'Month':{'output_variables':None,'default':None},
+            'Day':{'output_variables':None,'default':None},
             'Hour':{'output_variables':None,'default':None},
+            'Minute':{'output_variables':None,'default':None},
             'Day Type':{'output_variables':None,'default':None},
             'Daylight Savings Status':{'output_variables':None,'default':None},
             'Equipment Electric Power [kWh]':{'output_variables':['Lights Electricity Energy','Electric Equipment Electricity Energy',],'default':0},
@@ -181,7 +183,7 @@ class CityLearnNRELXStock:
             'citylearn_energyplus_simulation_result',
             simulation_result.columns.tolist(),
             simulation_result.values,
-            on_conflict_fields=['metadata_id','Month','Hour', 'Day Type']
+            on_conflict_fields=['metadata_id','Month','Day','Hour','Minute']
         )
         database.insert(
             'citylearn_building_attributes',
@@ -254,8 +256,9 @@ class CityLearnNRELXStock:
             WHERE metadata_id = {metadata_id}
             ORDER BY
                 "Month",
-                "Day Type",
-                "Hour"
+                "Day",
+                "Hour",
+                "Minute"
             """
             simulation_result = database.query_table(query).drop(columns=['metadata_id'])
             simulation_result.columns = [c.replace('(','[').replace(')',']') for c in simulation_result.columns]
