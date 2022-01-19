@@ -181,21 +181,21 @@ class XStockDatabase(SQLiteDatabase):
             'year_of_publication':year_of_publication,
             'release':release
         }
-        dataset_id = self.__update_dataset_table(dataset)
-        self.__update_data_dictionary_table(dataset,dataset_id)
-        buildings = self.__update_metadata_table(dataset,dataset_id,filters=filters)
+        dataset_id = self.update_dataset_table(dataset)
+        self.update_data_dictionary_table(dataset,dataset_id)
+        buildings = self.update_metadata_table(dataset,dataset_id,filters=filters)
 
         if buildings is not None:
-            self.__update_upgrade_table(dataset,dataset_id,buildings['upgrade'].unique())
-            self.__update_spatial_tract_table(dataset,dataset_id,buildings)
-            self.__update_weather_table(dataset_id,buildings)
-            self.__update_timeseries_table(dataset,buildings)
-            self.__update_model_table(dataset,buildings)
-            self.__update_schedule_table(buildings)
+            self.update_upgrade_table(dataset,dataset_id,buildings['upgrade'].unique())
+            self.update_spatial_tract_table(dataset,dataset_id,buildings)
+            self.update_weather_table(dataset_id,buildings)
+            self.update_timeseries_table(dataset,buildings)
+            self.update_model_table(dataset,buildings)
+            self.update_schedule_table(buildings)
         else:
             pass
         
-    def __update_dataset_table(self,dataset):
+    def update_dataset_table(self,dataset):
         self.insert(
             'dataset',
             list(dataset.keys()),
@@ -214,7 +214,7 @@ class XStockDatabase(SQLiteDatabase):
         """).iloc[0]['id']
         return dataset_id
 
-    def __update_data_dictionary_table(self,dataset,dataset_id):
+    def update_data_dictionary_table(self,dataset,dataset_id):
         data = XStockDatabase.__download(key='data_dictionary',**dataset)
         data.columns = [c.replace('.','_').lower() for c in data.columns]
         data['dataset_id'] = dataset_id
@@ -225,7 +225,7 @@ class XStockDatabase(SQLiteDatabase):
             ['dataset_id','field_location','field_name']
         )
 
-    def __update_metadata_table(self,dataset,dataset_id,filters=None):
+    def update_metadata_table(self,dataset,dataset_id,filters=None):
         data = XStockDatabase.__download(key='metadata',**dataset)
         data = data.reset_index(drop=False)
 
@@ -267,7 +267,7 @@ class XStockDatabase(SQLiteDatabase):
             print('Found no buildings that match filters.')
             return None
 
-    def __update_upgrade_table(self,dataset,dataset_id,upgrade_ids):
+    def update_upgrade_table(self,dataset,dataset_id,upgrade_ids):
         data = XStockDatabase.__download(key='upgrade_dictionary',**dataset)
         data['dataset_id'] = dataset_id
         data.columns = [c.replace('.','_').lower() for c in data.columns]
@@ -283,7 +283,7 @@ class XStockDatabase(SQLiteDatabase):
         else:
             pass
 
-    def __update_spatial_tract_table(self,dataset,dataset_id,buildings):
+    def update_spatial_tract_table(self,dataset,dataset_id,buildings):
         data = XStockDatabase.__download(key='spatial_tract',**dataset)
         data['dataset_id'] = dataset_id
         columns = ['in_nhgis_county_gisjoin','in_nhgis_puma_gisjoin']
@@ -299,7 +299,7 @@ class XStockDatabase(SQLiteDatabase):
             ['dataset_id','nhgis_tract_gisjoin']
         )
 
-    def __update_weather_table(self,dataset_id,buildings):
+    def update_weather_table(self,dataset_id,buildings):
         tmy3 = self.download_energyplus_weather_metadata()
         tmy3 = tmy3[tmy3['provider']=='TMY3'].copy()
         tmy3[['longitude','latitude']] = tmy3[['longitude','latitude']].astype(str)
@@ -368,7 +368,7 @@ class XStockDatabase(SQLiteDatabase):
         else:
             pass
         
-    def __update_timeseries_table(self,dataset,buildings):
+    def update_timeseries_table(self,dataset,buildings):
         buildings = buildings[['bldg_id','metadata_id','county','upgrade']].to_records(index=False)
         dataset_url = XStockDatabase.__get_dataset_url(**dataset)
 
@@ -386,7 +386,7 @@ class XStockDatabase(SQLiteDatabase):
                 ['metadata_id','timestamp']
             )
 
-    def __update_model_table(self,dataset,buildings):
+    def update_model_table(self,dataset,buildings):
         buildings = buildings[['bldg_id','metadata_id','upgrade']].to_records(index=False)
         dataset_url = XStockDatabase.__get_dataset_url(**dataset)
         values = []
@@ -407,27 +407,21 @@ class XStockDatabase(SQLiteDatabase):
             on_conflict_fields=['metadata_id']
         )
 
-    def __update_schedule_table(self,buildings):
-        # this is a temporary fix until NREL uploads the schedules.csv files in the data repository
-        url = 'https://raw.githubusercontent.com/NREL/resstock/develop/files/8760.csv'
-        data = pd.read_csv(url)
-        data['timestamp'] = pd.date_range('2019-01-01 00:00:00','2019-12-31 23:00:00',freq='H')
-        data = data.set_index('timestamp')
-        data = data.resample('900S').ffill()
-        data = pd.concat([data]+[data.iloc[-1:] for _ in range(3)])
-        data = data.reset_index(drop=False)
-        data['day'] = data.index
-        data['hour'] = data['timestamp'].dt.hour
-        data['minute'] = data['timestamp'].dt.minute
-        data = data.drop(columns=['timestamp'])
+    def update_schedule_table(self,dataset,buildings):
+        buildings = buildings[['bldg_id','metadata_id','upgrade']].to_records(index=False)
+        dataset_url = XStockDatabase.__get_dataset_url(**dataset)
 
-        for metadata_id in buildings['metadata_id']:
+        for (bldg_id,metadata_id,upgrade) in buildings:
+            building_path = f'occupancy_schedules/bldg{bldg_id:07d}-up{upgrade:02d}.csv.gz'
+            url = os.path.join(dataset_url,building_path)
+            data = pd.read_csv(url)
             data['metadata_id'] = metadata_id
+            data['timestep'] = data.index
             self.insert(
                 'schedule',
                 data.columns.tolist(),
                 data.to_records(index=False),
-                on_conflict_fields=['metadata_id','day','hour','minute']
+                on_conflict_fields=['metadata_id','timestep']
             )
 
     @classmethod

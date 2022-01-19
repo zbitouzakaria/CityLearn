@@ -156,18 +156,22 @@ class CityLearnNRELXStock:
         output_directory = os.path.join(root_output_directory,output_directory) if root_output_directory is not None else output_directory
         schedules_filename = 'schedules.csv'
         schedule = database.query_table(f"""SELECT * FROM schedule WHERE metadata_id = {simulation_data['metadata_id']}""")
-        schedule = schedule.drop(columns=['metadata_id','day','hour','minute',])
-        schedule.to_csv(schedules_filename,index=False)
-        schedule.to_csv(os.path.join(output_directory,schedules_filename),index=False) # also store to output directory
+        schedule = schedule.drop(columns=['metadata_id','timestep',])
          
         # simulate
         osm_editor = OpenStudioModelEditor(simulation_data['osm'])
-        idf = osm_editor.forward_translate()
+
+        try:
+            schedule.to_csv(schedules_filename,index=False)
+            idf = osm_editor.forward_translate()
+            simulator = CityLearnSimulator(idd_filepath,idf,simulation_data['epw'],simulation_id=simulation_id,output_directory=output_directory)
+            simulator.preprocess()
+            simulator.simulate()
+        finally:
+            os.remove(schedules_filename)
+        
         write_data(simulation_data['osm'],os.path.join(output_directory,f'{simulation_id}.osm'))
-        simulator = CityLearnSimulator(idd_filepath,idf,simulation_data['epw'],simulation_id=simulation_id,output_directory=output_directory)
-        simulator.preprocess()
-        simulator.simulate()
-        os.remove(schedules_filename)
+        schedule.to_csv(os.path.join(output_directory,schedules_filename),index=False) # write to output directory
         simulation_result = simulator.get_simulation_result(simulation_result_query_filepath)
         attributes = simulator.get_attributes(random_seed=simulation_id)
         attributes['File_Name'] = f'Building_{simulation_id}.csv'
