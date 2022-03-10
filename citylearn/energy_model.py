@@ -1,4 +1,4 @@
-from typing import Iterable, List, Union
+from typing import Iterable, List, Tuple, Union
 import numpy as np
 from citylearn.base import Environment
 np.seterr(divide = 'ignore', invalid = 'ignore')
@@ -129,6 +129,61 @@ class HeatPump(ElectricDevice):
             heating_nominal_power = 0
 
         self.nominal_power = max(cooling_nominal_power + heating_nominal_power)
+
+class EN14825HeatPump(HeatPump):
+    def __init__(self, nominal_power: float, nominal_cop: float = 2.9, **kwargs):
+        super().__init__(nominal_power = nominal_power, **kwargs)
+        self.nominal_cop = nominal_cop
+
+    @property
+    def nominal_cop(self) -> float:
+        return self.__nominal_cop
+
+    @nominal_cop.setter
+    def nominal_cop(self, nominal_cop: float):
+        self.__nominal_cop = nominal_cop
+
+    def get_cop(self, outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool, output_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
+        if heating:
+            raise NotImplementedError(f'{self.__name__} does not support heating mode.')
+        else:
+            iterable = isinstance(outdoor_drybulb_temperature, Iterable)
+            lower_bound_temperature, _ = self.__get_outdoor_drybulb_temperature_bounds()
+            lower_bound_temperature = np.ones(len(outdoor_drybulb_temperature), dtype = float)*lower_bound_temperature if iterable else lower_bound_temperature
+            ones = np.ones(len(outdoor_drybulb_temperature), dtype = float) if iterable else 1
+            outdoor_drybulb_temperature = np.array(outdoor_drybulb_temperature, dtype = float)
+            adjusted_outdoor_drybulb_temperature = np.nanmax([outdoor_drybulb_temperature, lower_bound_temperature])
+            cop = self.nominal_cop*(-0.0859*adjusted_outdoor_drybulb_temperature + 4.001)
+
+            if output_power is not None:
+                max_output = np.array(self.get_max_output_power(outdoor_drybulb_temperature, heating), dtype = float)
+                max_cop = cop.copy()
+                cop *= ((output_power/max_output)/(0.9*(output_power/max_output) + 0.1))
+                cop[outdoor_drybulb_temperature == 20] = np.nanmin([cop[outdoor_drybulb_temperature == 20], max_cop[outdoor_drybulb_temperature == 20]])
+            else:
+                pass
+
+            cop = np.array(np.nanmax([cop, ones]))
+            return cop
+
+    def get_max_output_power(self, outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool, max_electric_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
+        if heating:
+            raise NotImplementedError(f'{self.__name__} does not support heating mode.')
+        else:
+            iterable = isinstance(outdoor_drybulb_temperature, Iterable)
+            lower_bound_temperature, upper_bound_temperature = self.__get_outdoor_drybulb_temperature_bounds()
+            lower_bound_temperature = np.ones(len(outdoor_drybulb_temperature), dtype = float)*lower_bound_temperature if iterable else lower_bound_temperature
+            upper_bound_temperature = np.ones(len(outdoor_drybulb_temperature), dtype = float)*upper_bound_temperature if iterable else upper_bound_temperature
+            adjusted_outdoor_drybulb_temperature = np.nanmin(np.nanmax([outdoor_drybulb_temperature, lower_bound_temperature]), upper_bound_temperature)
+            max_output = self.nominal_power*(0.0021*adjusted_outdoor_drybulb_temperature**2 - 0.0751*adjusted_outdoor_drybulb_temperature + 1.0739)
+            max_output = np.nanmin([max_electric_power, max_output])
+            return list(max_output) if iterable else max_output
+
+    def get_input_power(self, output_power: Union[float, Iterable[float]], outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool) -> Union[float, Iterable[float]]:
+        return output_power/self.get_cop(outdoor_drybulb_temperature, heating, output_power = output_power)
+
+    def __get_outdoor_drybulb_temperature_bounds(self) -> Tuple[float]:
+        return 20.0, 35.0
 
 class ElectricHeater(ElectricDevice):
     def __init__(self, nominal_power: float, efficiency: float = 0.9, **kwargs):
