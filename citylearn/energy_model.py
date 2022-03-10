@@ -156,9 +156,9 @@ class EN14825HeatPump(HeatPump):
             cop = self.nominal_cop*(-0.0859*adjusted_outdoor_drybulb_temperature + 4.001)
 
             if output_power is not None:
-                max_output = np.array(self.get_max_output_power(outdoor_drybulb_temperature, heating), dtype = float)
+                max_output_power = np.array(self.get_max_output_power(outdoor_drybulb_temperature, heating), dtype = float)
                 max_cop = cop.copy()
-                cop *= ((output_power/max_output)/(0.9*(output_power/max_output) + 0.1))
+                cop *= ((output_power/max_output_power)/(0.9*(output_power/max_output_power) + 0.1))
                 cop[outdoor_drybulb_temperature == 20] = np.nanmin([cop[outdoor_drybulb_temperature == 20], max_cop[outdoor_drybulb_temperature == 20]])
             else:
                 pass
@@ -184,6 +184,21 @@ class EN14825HeatPump(HeatPump):
 
     def __get_outdoor_drybulb_temperature_bounds(self) -> Tuple[float]:
         return 20.0, 35.0
+
+    def autosize(self, outdoor_drybulb_temperature: Iterable[float], cooling_demand: Iterable[float] = None, heating_demand: Iterable[float] = None):
+        if heating_demand is not None:
+            raise NotImplementedError(f'{self.__name__} does not support heating mode.')
+        else:  
+            try:
+                current_nominal_power = self.nominal_power
+                self.nominal_power = 1
+                max_output_power = self.get_max_output_power(outdoor_drybulb_temperature, False)
+            except Exception as e:
+                self.nominal_power = current_nominal_power
+                raise e
+
+            nominal_power = self.nominal_power*np.array(cooling_demand, dtype = float)/max_output_power
+            self.nominal_power = np.nanmax(nominal_power)
 
 class ElectricHeater(ElectricDevice):
     def __init__(self, nominal_power: float, efficiency: float = 0.9, **kwargs):
