@@ -83,21 +83,21 @@ class HeatPump(ElectricDevice):
     def t_target_cooling(self, t_target_cooling: float):
         self.__t_target_cooling = t_target_cooling
 
-    def get_cop(self, outdoor_drybulb_temperature: Union[float, Iterable[float]],  heating: bool) -> Union[float, Iterable[float]]:
+    def get_cop(self, outdoor_dry_bulb_temperature: Union[float, Iterable[float]],  heating: bool) -> Union[float, Iterable[float]]:
         c_to_k = lambda x: x + 273.15
-        outdoor_drybulb_temperature = np.array(outdoor_drybulb_temperature)
+        outdoor_dry_bulb_temperature = np.array(outdoor_dry_bulb_temperature)
 
         if heating:
-            cop = self.efficiency*c_to_k(self.t_target_heating)/(self.t_target_heating - outdoor_drybulb_temperature)
+            cop = self.efficiency*c_to_k(self.t_target_heating)/(self.t_target_heating - outdoor_dry_bulb_temperature)
         else:
-            cop = self.efficiency*c_to_k(self.t_target_cooling)/(outdoor_drybulb_temperature - self.t_target_cooling)
+            cop = self.efficiency*c_to_k(self.t_target_cooling)/(outdoor_dry_bulb_temperature - self.t_target_cooling)
         
         cop = np.array(cop)
         cop[cop < 0] = 20
         cop[cop > 20] = 20
         return cop
 
-    def get_max_output_power(self, outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool, max_electric_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
+    def get_max_output_power(self, outdoor_dry_bulb_temperature: Union[float, Iterable[float]], heating: bool, max_electric_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
         """
         Method that calculates the heating COP and the maximum heating power available at current time step.
         Args:
@@ -107,24 +107,24 @@ class HeatPump(ElectricDevice):
             max_heating (float): maximum amount of heating energy that the heatpump can provide
         """
 
-        cop = self.get_cop(outdoor_drybulb_temperature, heating)
+        cop = self.get_cop(outdoor_dry_bulb_temperature, heating)
 
         if max_electric_power is None: 
             return self.available_nominal_power*cop  
         else:
             return np.minimum(max_electric_power, self.available_nominal_power)*cop 
 
-    def get_input_power(self, output_power: Union[float, Iterable[float]], outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool) -> Union[float, Iterable[float]]:
-        return output_power/self.get_cop(outdoor_drybulb_temperature, heating)
+    def get_input_power(self, output_power: Union[float, Iterable[float]], outdoor_dry_bulb_temperature: Union[float, Iterable[float]], heating: bool) -> Union[float, Iterable[float]]:
+        return output_power/self.get_cop(outdoor_dry_bulb_temperature, heating)
 
-    def autosize(self, outdoor_drybulb_temperature: Iterable[float], cooling_demand: Iterable[float] = None, heating_demand: Iterable[float] = None):
+    def autosize(self, outdoor_dry_bulb_temperature: Iterable[float], cooling_demand: Iterable[float] = None, heating_demand: Iterable[float] = None):
         if cooling_demand is not None:
-            cooling_nominal_power = np.array(cooling_demand)/self.get_cop(outdoor_drybulb_temperature, False)
+            cooling_nominal_power = np.array(cooling_demand)/self.get_cop(outdoor_dry_bulb_temperature, False)
         else:
             cooling_nominal_power = 0
         
         if heating_demand is not None:
-            heating_nominal_power = np.array(heating_demand)/self.get_cop(outdoor_drybulb_temperature, True)
+            heating_nominal_power = np.array(heating_demand)/self.get_cop(outdoor_dry_bulb_temperature, True)
         else:
             heating_nominal_power = 0
 
@@ -143,56 +143,56 @@ class EN14825HeatPump(HeatPump):
     def nominal_cop(self, nominal_cop: float):
         self.__nominal_cop = nominal_cop
 
-    def get_cop(self, outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool, output_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
+    def get_cop(self, outdoor_dry_bulb_temperature: Union[float, Iterable[float]], heating: bool, output_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
         if heating:
             raise NotImplementedError(f'{self.__name__} does not support heating mode.')
         else:
-            iterable = isinstance(outdoor_drybulb_temperature, Iterable)
-            lower_bound_temperature, _ = self.__get_outdoor_drybulb_temperature_bounds()
-            lower_bound_temperature = np.ones(len(outdoor_drybulb_temperature), dtype = float)*lower_bound_temperature if iterable else lower_bound_temperature
-            ones = np.ones(len(outdoor_drybulb_temperature), dtype = float) if iterable else 1
-            outdoor_drybulb_temperature = np.array(outdoor_drybulb_temperature, dtype = float)
-            adjusted_outdoor_drybulb_temperature = np.nanmax([outdoor_drybulb_temperature, lower_bound_temperature])
-            cop = self.nominal_cop*(-0.0859*adjusted_outdoor_drybulb_temperature + 4.001)
+            iterable = isinstance(outdoor_dry_bulb_temperature, Iterable)
+            lower_bound_temperature, _ = self.__get_outdoor_dry_bulb_temperature_bounds()
+            lower_bound_temperature = np.ones(len(outdoor_dry_bulb_temperature), dtype = float)*lower_bound_temperature if iterable else lower_bound_temperature
+            ones = np.ones(len(outdoor_dry_bulb_temperature), dtype = float) if iterable else 1
+            outdoor_dry_bulb_temperature = np.array(outdoor_dry_bulb_temperature, dtype = float)
+            adjusted_outdoor_dry_bulb_temperature = np.nanmax([outdoor_dry_bulb_temperature, lower_bound_temperature])
+            cop = self.nominal_cop*(-0.0859*adjusted_outdoor_dry_bulb_temperature + 4.001)
 
             if output_power is not None:
-                max_output_power = np.array(self.get_max_output_power(outdoor_drybulb_temperature, heating), dtype = float)
+                max_output_power = np.array(self.get_max_output_power(outdoor_dry_bulb_temperature, heating), dtype = float)
                 max_cop = cop.copy()
                 cop *= ((output_power/max_output_power)/(0.9*(output_power/max_output_power) + 0.1))
-                cop[outdoor_drybulb_temperature == 20] = np.nanmin([cop[outdoor_drybulb_temperature == 20], max_cop[outdoor_drybulb_temperature == 20]])
+                cop[outdoor_dry_bulb_temperature == 20] = np.nanmin([cop[outdoor_dry_bulb_temperature == 20], max_cop[outdoor_dry_bulb_temperature == 20]])
             else:
                 pass
 
             cop = np.array(np.nanmax([cop, ones]))
             return cop
 
-    def get_max_output_power(self, outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool, max_electric_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
+    def get_max_output_power(self, outdoor_dry_bulb_temperature: Union[float, Iterable[float]], heating: bool, max_electric_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
         if heating:
             raise NotImplementedError(f'{self.__name__} does not support heating mode.')
         else:
-            iterable = isinstance(outdoor_drybulb_temperature, Iterable)
-            lower_bound_temperature, upper_bound_temperature = self.__get_outdoor_drybulb_temperature_bounds()
-            lower_bound_temperature = np.ones(len(outdoor_drybulb_temperature), dtype = float)*lower_bound_temperature if iterable else lower_bound_temperature
-            upper_bound_temperature = np.ones(len(outdoor_drybulb_temperature), dtype = float)*upper_bound_temperature if iterable else upper_bound_temperature
-            adjusted_outdoor_drybulb_temperature = np.nanmin(np.nanmax([outdoor_drybulb_temperature, lower_bound_temperature]), upper_bound_temperature)
-            max_output = self.nominal_power*(0.0021*adjusted_outdoor_drybulb_temperature**2 - 0.0751*adjusted_outdoor_drybulb_temperature + 1.0739)
+            iterable = isinstance(outdoor_dry_bulb_temperature, Iterable)
+            lower_bound_temperature, upper_bound_temperature = self.__get_outdoor_dry_bulb_temperature_bounds()
+            lower_bound_temperature = np.ones(len(outdoor_dry_bulb_temperature), dtype = float)*lower_bound_temperature if iterable else lower_bound_temperature
+            upper_bound_temperature = np.ones(len(outdoor_dry_bulb_temperature), dtype = float)*upper_bound_temperature if iterable else upper_bound_temperature
+            adjusted_outdoor_dry_bulb_temperature = np.nanmin(np.nanmax([outdoor_dry_bulb_temperature, lower_bound_temperature]), upper_bound_temperature)
+            max_output = self.nominal_power*(0.0021*adjusted_outdoor_dry_bulb_temperature**2 - 0.0751*adjusted_outdoor_dry_bulb_temperature + 1.0739)
             max_output = np.nanmin([max_electric_power, max_output])
             return list(max_output) if iterable else max_output
 
-    def get_input_power(self, output_power: Union[float, Iterable[float]], outdoor_drybulb_temperature: Union[float, Iterable[float]], heating: bool) -> Union[float, Iterable[float]]:
-        return output_power/self.get_cop(outdoor_drybulb_temperature, heating, output_power = output_power)
+    def get_input_power(self, output_power: Union[float, Iterable[float]], outdoor_dry_bulb_temperature: Union[float, Iterable[float]], heating: bool) -> Union[float, Iterable[float]]:
+        return output_power/self.get_cop(outdoor_dry_bulb_temperature, heating, output_power = output_power)
 
-    def __get_outdoor_drybulb_temperature_bounds(self) -> Tuple[float]:
+    def __get_outdoor_dry_bulb_temperature_bounds(self) -> Tuple[float]:
         return 20.0, 35.0
 
-    def autosize(self, outdoor_drybulb_temperature: Iterable[float], cooling_demand: Iterable[float] = None, heating_demand: Iterable[float] = None):
+    def autosize(self, outdoor_dry_bulb_temperature: Iterable[float], cooling_demand: Iterable[float] = None, heating_demand: Iterable[float] = None):
         if heating_demand is not None:
             raise NotImplementedError(f'{self.__name__} does not support heating mode.')
         else:  
             try:
                 current_nominal_power = self.nominal_power
                 self.nominal_power = 1
-                max_output_power = self.get_max_output_power(outdoor_drybulb_temperature, False)
+                max_output_power = self.get_max_output_power(outdoor_dry_bulb_temperature, False)
             except Exception as e:
                 self.nominal_power = current_nominal_power
                 raise e

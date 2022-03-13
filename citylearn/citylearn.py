@@ -1,20 +1,86 @@
+from math import isnan
 import os
 from pathlib import Path
 from typing import Any, List, Mapping, Union
 from gym import Env, spaces
 import numpy as np
 import pandas as pd
+import torch
 from citylearn.base import Environment
 from citylearn.data import EnergySimulation, CarbonIntensity, Weather
-from citylearn.energy_model import Battery, ElectricHeater, HeatPump, PV, StorageTank
+from citylearn.energy_model import Battery, ElectricHeater, EN14825HeatPump, HeatPump, PV, StorageTank
 from citylearn.preprocessing import Normalize, OnehotEncoding, PeriodicNormalization, RemoveFeature
 from citylearn.utilities import read_json
-    
+
+class BuildingDryBulbTemperatureModel(torch.nn.Module):
+    def __init__(self, input_size: int, lookback: int, hidden_size: int, num_layers: int):
+        super().__init__()
+        self.input_size = input_size
+        self.lookback = lookback
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+
+    @property
+    def input_size(self) -> int:
+        return self.__input_size
+
+    @property
+    def lookback(self) -> int:
+        return self.__lookback
+
+    @property
+    def hidden_size(self) -> int:
+        return self.__hidden_size
+
+    @property
+    def num_layers(self) -> int:
+        return self.__num_layers
+
+    @input_size.setter
+    def input_size(self, input_size: int):
+        self.__input_size = input_size
+
+    @lookback.setter
+    def lookback(self, lookback: int):
+        self.__lookback = lookback
+
+    @hidden_size.setter
+    def hidden_size(self, hidden_size: int):
+        self.__hidden_size = hidden_size
+
+    @num_layers.setter
+    def num_layers(self, num_layers: int):
+        self.__num_layers = num_layers
+
+    def forward(self, x: List[Any], h: int):
+        lstm_out, h = torch.nn.LSTM(
+            input_size = self.input_size, 
+            hidden_size = self.hidden_size, 
+            num_layers = self.num_layers, 
+            batch_first = True
+        )(x, h)
+        out = lstm_out[: , -1, :]
+        out_linear_transfer = torch.nn.Linear(self.hidden_size, 1)(out)
+        return out_linear_transfer, h
+
+    def init_hidden(self, batch_size: int):
+        hidden_state = torch.zeros(self.num_layers, batch_size, self.hidden_size)
+        cell_state = torch.zeros(self.num_layers, batch_size, self.hidden_size)
+        hidden = (hidden_state, cell_state)
+        return hidden
+
+    def reset(self):
+        return
+
+    def terminate(self):
+        return
+
 class Building(Environment):
     def __init__(
         self, energy_simulation: EnergySimulation, weather: Weather, state_metadata: Mapping[str, bool], action_metadata: Mapping[str, bool], carbon_intensity: CarbonIntensity = None, 
         dhw_storage: StorageTank = None, cooling_storage: StorageTank = None, heating_storage: StorageTank = None, electrical_storage: Battery = None, 
-        dhw_device: Union[HeatPump, ElectricHeater] = None, cooling_device: HeatPump = None, heating_device: Union[HeatPump, ElectricHeater] = None, pv: PV = None, name: str = None
+        dhw_device: Union[HeatPump, ElectricHeater] = None, cooling_device: Union[HeatPump, EN14825HeatPump] = None, heating_device: Union[HeatPump, ElectricHeater] = None, 
+        dry_bulb_temperature_model: BuildingDryBulbTemperatureModel = None, pv: PV = None, name: str = None
     ):
         self.name = name
         self.energy_simulation = energy_simulation
@@ -28,6 +94,7 @@ class Building(Environment):
         self.cooling_device = cooling_device
         self.heating_device = heating_device
         self.pv = pv
+        self.dry_bulb_temperature_model = dry_bulb_temperature_model
         self.state_metadata = state_metadata
         self.action_metadata = action_metadata
         super().__init__()
@@ -83,6 +150,10 @@ class Building(Environment):
     @property
     def pv(self) -> PV:
         return self.__pv
+
+    @property
+    def dry_bulb_temperature_model(self) -> BuildingDryBulbTemperatureModel:
+        return self.__dry_bulb_temperature_model
 
     @property
     def name(self) -> str:
@@ -159,15 +230,37 @@ class Building(Environment):
                                         + (self.cooling_storage.capacity/2.0)\
                                             + (self.heating_storage.capacity/2.0)\
                                                 - data['solar_generation']
-                    high_limit.append(max(net_electric_consumption))
+                    high_limit.append(np.nanmax(net_electric_consumption))
+
+                elif key == 'cooling_device_cop_from_outdoor_dry_bulb_temperature':
+                    cop = self.cooling_device.get_cop(self.weather.outdoor_dry_bulb_temperature, False)
+                    low_limit.append(np.nanmin(cop))
+                    high_limit.append(np.nanmax(cop))
+
+                elif key == 'cooling_device_cop_from_output_power':
+                    if isinstance(self.cooling_device, EN14825HeatPump):
+                        max_output_power = self.cooling_device.get_max_output_power(self.weather.outdoor_dry_bulb_temperature, False)
+                        cop = self.cooling_device.get_cop(self.weather.outdoor_dry_bulb_temperature, False, output_power = max_output_power)
+                    
+                    else:
+                        cop = self.cooling_device.get_cop(self.weather.outdoor_dry_bulb_temperature, False)
+
+                    low_limit.append(np.nanmin(cop))
+                    high_limit.append(np.nanmax(cop))
+
+                elif key == 'indoor_dry_bulb_temperature' and self.dry_bulb_temperature_model:
+                    pass
+
+                elif key == 'indoor_dry_bulb_temperature_delta' and self.dry_bulb_temperature_model:
+                    pass
 
                 elif key in ['cooling_storage_soc', 'heating_storage_soc', 'dhw_storage_soc', 'electrical_storage_soc']:
                     low_limit.append(0.0)
                     high_limit.append(1.0)
 
                 else:
-                    low_limit.append(min(data[key]))
-                    high_limit.append(max(data[key]))
+                    low_limit.append(np.nanmin(data[key]))
+                    high_limit.append(np.nanmax(data[key]))
             
             else:
                 continue
@@ -249,7 +342,7 @@ class Building(Environment):
     @property
     def cooling_electricity_consumption(self) -> List[float]:
         demand = np.sum([self.cooling_demand, self.cooling_storage.energy_balance], axis = 0)
-        consumption = self.cooling_device.get_input_power(demand, self.weather.outdoor_drybulb_temperature[:self.time_step], False)
+        consumption = self.cooling_device.get_input_power(demand, self.weather.outdoor_dry_bulb_temperature[:self.time_step], False)
         return list(consumption)
 
     @property
@@ -257,7 +350,7 @@ class Building(Environment):
         demand = np.sum([self.heating_demand, self.heating_storage.energy_balance], axis = 0)
 
         if isinstance(self.heating_device, HeatPump):
-            consumption = self.heating_device.get_input_power(demand, self.weather.outdoor_drybulb_temperature[:self.time_step], True)
+            consumption = self.heating_device.get_input_power(demand, self.weather.outdoor_dry_bulb_temperature[:self.time_step], True)
         else:
             consumption = self.dhw_device.get_input_power(demand)
 
@@ -268,7 +361,7 @@ class Building(Environment):
         demand = np.sum([self.dhw_demand, self.dhw_storage.energy_balance], axis = 0)
 
         if isinstance(self.dhw_device, HeatPump):
-            consumption = self.dhw_device.get_input_power(demand, self.weather.outdoor_drybulb_temperature[:self.time_step], True)
+            consumption = self.dhw_device.get_input_power(demand, self.weather.outdoor_dry_bulb_temperature[:self.time_step], True)
         else:
             consumption = self.dhw_device.get_input_power(demand)
 
@@ -276,13 +369,13 @@ class Building(Environment):
 
     @property
     def cooling_storage_electricity_consumption(self) -> List[float]:
-        consumption = self.cooling_device.get_input_power(self.cooling_storage.energy_balance, self.weather.outdoor_drybulb_temperature[:self.time_step], False)
+        consumption = self.cooling_device.get_input_power(self.cooling_storage.energy_balance, self.weather.outdoor_dry_bulb_temperature[:self.time_step], False)
         return list(consumption)
 
     @property
     def heating_storage_electricity_consumption(self) -> List[float]:
         if isinstance(self.heating_device, HeatPump):
-            consumption = self.heating_device.get_input_power(self.heating_storage.energy_balance, self.weather.outdoor_drybulb_temperature[:self.time_step], True)
+            consumption = self.heating_device.get_input_power(self.heating_storage.energy_balance, self.weather.outdoor_dry_bulb_temperature[:self.time_step], True)
         else:
             consumption = self.heating_device.get_input_power(self.heating_storage.energy_balance)
 
@@ -291,7 +384,7 @@ class Building(Environment):
     @property
     def dhw_storage_electricity_consumption(self) -> List[float]:
         if isinstance(self.dhw_device, HeatPump):
-            consumption = self.dhw_device.get_input_power(self.dhw_storage.energy_balance, self.weather.outdoor_drybulb_temperature[:self.time_step], True)
+            consumption = self.dhw_device.get_input_power(self.dhw_storage.energy_balance, self.weather.outdoor_dry_bulb_temperature[:self.time_step], True)
         else:
             consumption = self.dhw_device.get_input_power(self.dhw_storage.energy_balance)
 
@@ -420,6 +513,10 @@ class Building(Environment):
     def pv(self, pv: PV):
         self.__pv = PV(0.0) if pv is None else pv
 
+    @dry_bulb_temperature_model.setter
+    def dry_bulb_temperature_model(self, dry_bulb_temperature_model: BuildingDryBulbTemperatureModel):
+        self.__dry_bulb_temperature_model = dry_bulb_temperature_model
+
     @name.setter
     def name(self, name: str):
         self.__name = self.uid if name is None else name
@@ -433,16 +530,16 @@ class Building(Environment):
     def update_cooling(self, action: float = 0):
         energy = action*self.cooling_storage.capacity
         space_demand = self.energy_simulation.cooling_demand[self.time_step]
-        space_demand = 0 if space_demand is None else space_demand # case where space demand is unknown
-        max_output = self.cooling_device.get_max_output_power(self.weather.outdoor_drybulb_temperature[self.time_step], False)
+        space_demand = 0 if space_demand is None or isnan(space_demand) else space_demand # case where space demand is unknown
+        max_output = self.cooling_device.get_max_output_power(self.weather.outdoor_dry_bulb_temperature[self.time_step], False)
         energy = max(-space_demand, min(max_output - space_demand, energy))
         self.cooling_storage.charge(energy)
 
     def update_heating(self, action: float = 0):
         energy = action*self.heating_storage.capacity
         space_demand = self.energy_simulation.heating_demand[self.time_step]
-        space_demand = 0 if space_demand is None else space_demand # case where space demand is unknown
-        max_output = self.heating_device.get_max_output_power(self.weather.outdoor_drybulb_temperature[self.time_step], False)\
+        space_demand = 0 if space_demand is None or isnan(space_demand) else space_demand # case where space demand is unknown
+        max_output = self.heating_device.get_max_output_power(self.weather.outdoor_dry_bulb_temperature[self.time_step], False)\
             if isinstance(self.heating_device, HeatPump) else self.heating_device.get_max_output_power()
         energy = max(-space_demand, min(max_output - space_demand, energy))
         self.heating_storage.charge(energy)
@@ -450,8 +547,8 @@ class Building(Environment):
     def update_dhw(self, action: float = 0):
         energy = action*self.dhw_storage.capacity
         space_demand = self.energy_simulation.dhw_demand[self.time_step]
-        space_demand = 0 if space_demand is None else space_demand # case where space demand is unknown
-        max_output = self.dhw_device.get_max_output_power(self.weather.outdoor_drybulb_temperature[self.time_step], False)\
+        space_demand = 0 if space_demand is None or isnan(space_demand) else space_demand # case where space demand is unknown
+        max_output = self.dhw_device.get_max_output_power(self.weather.outdoor_dry_bulb_temperature[self.time_step], False)\
             if isinstance(self.dhw_device, HeatPump) else self.dhw_device.get_max_output_power()
         energy = max(-space_demand, min(max_output - space_demand, energy))
         self.dhw_storage.charge(energy)
@@ -461,14 +558,14 @@ class Building(Environment):
         self.electrical_storage.charge(energy)
 
     def autosize_cooling_device(self):
-        self.cooling_device.autosize(self.weather.outdoor_drybulb_temperature, cooling_demand = self.energy_simulation.cooling_demand)
+        self.cooling_device.autosize(self.weather.outdoor_dry_bulb_temperature, cooling_demand = self.energy_simulation.cooling_demand)
 
     def autosize_heating_device(self):
-        self.heating_device.autosize(self.weather.outdoor_drybulb_temperature, heating_demand = self.energy_simulation.heating_demand)\
+        self.heating_device.autosize(self.weather.outdoor_dry_bulb_temperature, heating_demand = self.energy_simulation.heating_demand)\
             if isinstance(self.heating_device, HeatPump) else self.heating_device.autosize(self.energy_simulation.heating_demand)
 
     def autosize_dhw_device(self):
-        self.dhw_device.autosize(self.weather.outdoor_drybulb_temperature, heating_demand = self.energy_simulation.dhw_demand)\
+        self.dhw_device.autosize(self.weather.outdoor_dry_bulb_temperature, heating_demand = self.energy_simulation.dhw_demand)\
             if isinstance(self.dhw_device, HeatPump) else self.dhw_device.autosize(self.energy_simulation.dhw_demand)
 
     def autosize_cooling_storage(self, **kwargs):
@@ -508,7 +605,7 @@ class Building(Environment):
         self.dhw_device.reset()
         self.pv.reset()
 
-class City(Environment, Env):
+class District(Environment, Env):
     def __init__(self,buildings: List[Building], time_steps: int, central_agent: bool = False, shared_states: List[str] = None):
         self.buildings = buildings
         self.time_steps = time_steps
@@ -548,8 +645,8 @@ class City(Environment, Env):
     def default_shared_states(self) -> List[str]:
         return [
             'month', 'day_type', 'hour', 'daylight_savings_status',
-            'outdoor_drybulb_temperature', 'outdoor_drybulb_temperature_predicted_6h',
-            'outdoor_drybulb_temperature_predicted_12h', 'outdoor_drybulb_temperature_predicted_24h',
+            'outdoor_dry_bulb_temperature', 'outdoor_dry_bulb_temperature_predicted_6h',
+            'outdoor_dry_bulb_temperature_predicted_12h', 'outdoor_dry_bulb_temperature_predicted_24h',
             'outdoor_relative_humidity', 'outdoor_relative_humidity_predicted_6h',
             'outdoor_relative_humidity_predicted_12h', 'outdoor_relative_humidity_predicted_24h',
             'diffuse_solar_radiation', 'diffuse_solar_radiation_predicted_6h',
@@ -557,6 +654,11 @@ class City(Environment, Env):
             'direct_solar_radiation', 'direct_solar_radiation_predicted_6h',
             'direct_solar_radiation_predicted_12h', 'direct_solar_radiation_predicted_24h',
             'carbon_intensity',
+            'electricity_price',
+            'electricity_price_predicted_1h',
+            'electricity_price_predicted_2h',
+            'electricity_price_predicted_3h',
+            'cooling_device_cop_from_outdoor_dry_bulb_temperature',
         ]
 
     @property
@@ -804,5 +906,5 @@ class City(Environment, Env):
             else:
                 continue
 
-        city = City(list(buildings), timesteps, central_agent = central_agent, shared_states = shared_states)
-        return city
+        district = District(list(buildings), timesteps, central_agent = central_agent, shared_states = shared_states)
+        return district
