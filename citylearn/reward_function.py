@@ -78,13 +78,12 @@ class RewardFunction:
 
         Notes
         -----
-        Reward value is calculated as :math:`[\textrm{max}(-e_0, 0), \dots, \textrm{max}(-e_n, 0)]` 
+        Reward value is calculated as :math:`[\textrm{max}(-e_0, 0), \dots, \textrm{max}(-e_n, 0)]`
         where :math:`e` is `electricity_consumption` and :math:`n` is the number of agents.
         """
-
         return (np.array(self.electricity_consumption)*-1).clip(max=0).tolist()
 
-    
+
 class MARL(RewardFunction):
     def __init__(self, agent_count: int, electricity_consumption: List[float] = None, **kwargs):
         super().__init__(agent_count, electricity_consumption=electricity_consumption, **kwargs)
@@ -119,7 +118,7 @@ class IndependentSACReward(RewardFunction):
 
         Notes
         -----
-        Reward value is calculated as :math:`[\textrm{max}(-e_0^3, 0), \dots, \textrm{max}(-e_n^3, 0)]` 
+        Reward value is calculated as :math:`[\textrm{max}(-e_0^3, 0), \dots, \textrm{max}(-e_n^3, 0)]`
         where :math:`e` is `electricity_consumption` and :math:`n` is the number of agents.
         """
 

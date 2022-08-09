@@ -63,7 +63,8 @@ class ElectricDevice(Device):
     def electricity_consumption(self) -> np.ndarray:
         r"""Electricity consumption time series."""
 
-        return np.array(self.__electricity_consumption)
+        #return np.array(self.__electricity_consumption)
+        return self.__electricity_consumption
 
     @property
     def available_nominal_power(self) -> float:
@@ -81,7 +82,7 @@ class ElectricDevice(Device):
 
     def update_electricity_consumption(self, electricity_consumption: float):
         r"""Updates `electricity_consumption` at current `time_step`.
-        
+
         Parameters
         ----------
         electricity_consumption : float
@@ -189,7 +190,7 @@ class HeatPump(ElectricDevice):
             cop = self.efficiency*c_to_k(self.target_heating_temperature)/(self.target_heating_temperature - outdoor_dry_bulb_temperature)
         else:
             cop = self.efficiency*c_to_k(self.target_cooling_temperature)/(outdoor_dry_bulb_temperature - self.target_cooling_temperature)
-        
+
         cop = np.array(cop)
         cop[cop < 0] = 20
         cop[cop > 20] = 20
@@ -221,8 +222,8 @@ class HeatPump(ElectricDevice):
 
         cop = self.get_cop(outdoor_dry_bulb_temperature, heating)
 
-        if max_electric_power is None: 
-            return self.available_nominal_power*cop  
+        if max_electric_power is None:
+            return self.available_nominal_power*cop
         else:
             return np.minimum(max_electric_power, self.available_nominal_power)*cop
 
@@ -272,14 +273,14 @@ class HeatPump(ElectricDevice):
         -----
         `nominal_power` = max((cooling_demand/cooling_cop) + (heating_demand/heating_cop))*safety_factor
         """
-        
+
         safety_factor = 1.0 if safety_factor is None else safety_factor
 
         if cooling_demand is not None:
             cooling_nominal_power = np.array(cooling_demand)/self.get_cop(outdoor_dry_bulb_temperature, False)
         else:
             cooling_nominal_power = 0
-        
+
         if heating_demand is not None:
             heating_nominal_power = np.array(heating_demand)/self.get_cop(outdoor_dry_bulb_temperature, True)
         else:
@@ -308,7 +309,7 @@ class ElectricHeater(ElectricDevice):
 
     @ElectricDevice.efficiency.setter
     def efficiency(self, efficiency: float):
-        efficiency = 0.9 if efficiency is None else efficiency   
+        efficiency = 0.9 if efficiency is None else efficiency
         ElectricDevice.efficiency.fset(self, efficiency)
 
     def get_max_output_power(self, max_electric_power: Union[float, Iterable[float]] = None) -> Union[float, Iterable[float]]:
@@ -343,7 +344,7 @@ class ElectricHeater(ElectricDevice):
 
         Parameters
         ----------
-        output_power : Union[float, Iterable[float]] 
+        output_power : Union[float, Iterable[float]]
             Output power from heat pump
 
         Returns
@@ -510,13 +511,22 @@ class StorageDevice(Device):
         for discharge or charge events respectively thus, thus accounts for energy losses to environment during charging and discharge.
         """
 
-        # actual energy charged/discharged irrespective of what is determined in the step function after 
+        # actual energy charged/discharged irrespective of what is determined in the step function after
         # taking into account storage design limits e.g. maximum power input/output, capacity
-        energy_balance = np.array(self.soc, dtype = float) -\
-            np.array([self.initial_soc] + self.__soc[0:-1], dtype = float)*(1 - self.loss_coefficient)
-        energy_balance[energy_balance >= 0.0] /= self.efficiency
-        energy_balance[energy_balance < 0.0] *= self.efficiency
-        return energy_balance
+        # energy_balance = np.array(self.soc, dtype = float) -\
+        #     np.array([self.initial_soc] + self.__soc[0:-1], dtype = float)*(1 - self.loss_coefficient)
+        # energy_balance[energy_balance >= 0.0] /= self.efficiency
+        # energy_balance[energy_balance < 0.0] *= self.efficiency
+        # return energy_balance
+
+        if self.__energy_balance is None or len(self.__soc) > len(self.__energy_balance):
+            energy_balance = self.soc - \
+                np.array([self.initial_soc] + self.__soc[0:-1], dtype = float)*(1 - self.loss_coefficient)
+            energy_balance[energy_balance >= 0.0] /= self.efficiency
+            energy_balance[energy_balance < 0.0] *= self.efficiency
+            self.__energy_balance = energy_balance
+
+        return self.__energy_balance
 
     @Device.efficiency.setter
     def efficiency(self, efficiency: float):
@@ -567,7 +577,7 @@ class StorageDevice(Device):
         If charging, soc = min(`soc_init` + energy*`efficiency`, `capacity`)
         If discharging, soc = max(0, `soc_init` + energy/`efficiency`)
         """
-        
+
         # The initial State Of Charge (SOC) is the previous SOC minus the energy losses
         soc = min(self.soc_init + energy*self.efficiency, self.capacity) if energy >= 0 else max(0, self.soc_init + energy/self.efficiency)
         self.__soc.append(soc)
@@ -597,6 +607,7 @@ class StorageDevice(Device):
 
         super().reset()
         self.__soc = [self.initial_soc]
+        self.__energy_balance = []
 
 class StorageTank(StorageDevice):
     def __init__(self, capacity: float, max_output_power: float = None, max_input_power: float = None, **kwargs):
@@ -610,7 +621,7 @@ class StorageTank(StorageDevice):
             Maximum amount of power that the storage unit can output [kW].
         max_input_power : float, optional
             Maximum amount of power that the storage unit can use to charge [kW].
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -657,11 +668,11 @@ class StorageTank(StorageDevice):
         If discharging, soc = max(0, `soc_init` + energy/`efficiency`, `max_output_power`)
         """
 
-        if energy >= 0:    
+        if energy >= 0:
             energy = energy if self.max_input_power is None else min(energy, self.max_input_power)
         else:
             energy = energy if self.max_output_power is None else max(-self.max_output_power, energy)
-        
+
         super().charge(energy)
 
 class Battery(ElectricDevice, StorageDevice):
@@ -678,7 +689,7 @@ class Battery(ElectricDevice, StorageDevice):
             Battery degradation; storage capacity lost in each charge and discharge cycle (as a fraction of the total capacity).
         power_efficiency_curve: list, default: [[0, 0.83],[0.3, 0.83],[0.7, 0.9],[0.8, 0.9],[1, 0.85]]
             Charging/Discharging efficiency as a function of the power released or consumed.
-        capacity_power_curve: list, default: [[0.0, 1],[0.8, 1],[1.0, 0.2]]   
+        capacity_power_curve: list, default: [[0.0, 1],[0.8, 1],[1.0, 0.2]]
             Maximum power of the battery as a function of its current state of charge.
 
         Other Parameters
@@ -693,7 +704,7 @@ class Battery(ElectricDevice, StorageDevice):
         self.capacity_loss_coefficient = capacity_loss_coefficient
         self.power_efficiency_curve = power_efficiency_curve
         self.capacity_power_curve = capacity_power_curve
-        
+
     @StorageDevice.capacity.getter
     def capacity(self) -> float:
         r"""Current time step maximum amount of energy the storage device can store in [kWh]"""
@@ -750,11 +761,18 @@ class Battery(ElectricDevice, StorageDevice):
         for discharge or charge events respectively thus, thus accounts for energy losses to environment during charging and discharge.
         """
 
-        energy_balance = np.array(super().energy_balance, dtype = float)
-        efficiency_history = np.array(self.efficiency_history, dtype = float)
-        energy_balance[energy_balance >= 0.0] *= self.efficiency/efficiency_history[energy_balance >= 0.0]
-        energy_balance[energy_balance < 0.0] /= self.efficiency*efficiency_history[energy_balance < 0.0]
-        return energy_balance
+        # energy_balance = np.array(super().energy_balance, dtype = float)
+        # efficiency_history = np.array(self.efficiency_history, dtype = float)
+        # energy_balance[energy_balance >= 0.0] *= self.efficiency/efficiency_history[energy_balance >= 0.0]
+        # energy_balance[energy_balance < 0.0] /= self.efficiency*efficiency_history[energy_balance < 0.0]
+        # return energy_balance
+        if self.__energy_balance is None or len(self.soc) > len(self.__energy_balance):
+            energy_balance = super().energy_balance
+            efficiency_history = np.array(self.efficiency_history, dtype = float)
+            energy_balance[energy_balance >= 0.0] *= self.efficiency/efficiency_history[energy_balance >= 0.0]
+            energy_balance[energy_balance < 0.0] /= self.efficiency*efficiency_history[energy_balance < 0.0]
+            self.__energy_balance = energy_balance
+        return self.__energy_balance
 
     @capacity.setter
     def capacity(self, capacity: float):
@@ -839,13 +857,13 @@ class Battery(ElectricDevice, StorageDevice):
             # Calculating the maximum power rate at which the battery can be charged or discharged
             idx = max(0, np.argmax(soc_normalized <= self.capacity_power_curve[0]) - 1)
             max_output_power = self.nominal_power*(
-                self.capacity_power_curve[1][idx] 
+                self.capacity_power_curve[1][idx]
                 + (self.capacity_power_curve[1][idx+1] - self.capacity_power_curve[1][idx])*(soc_normalized - self.capacity_power_curve[0][idx])
                 /(self.capacity_power_curve[0][idx+1] - self.capacity_power_curve[0][idx])
             )
         else:
             max_output_power = self.nominal_power
-        
+
         return max_output_power
 
     def get_current_efficiency(self, energy: float) -> float:
@@ -894,3 +912,4 @@ class Battery(ElectricDevice, StorageDevice):
         super().reset()
         self.__efficiency_history = self.__efficiency_history[0:1]
         self.__capacity_history = self.__capacity_history[0:1]
+        self.__energy_balance = []

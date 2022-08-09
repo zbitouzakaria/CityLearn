@@ -20,10 +20,10 @@ class CostFunction:
             Ramping cost.
 
         Notes
-        -----        
-        .. math:: 
+        -----
+        .. math::
             \textrm{ramping} = \sum_{i=1}^{n}{\lvert E_i - E_{i-1} \rvert}
-            
+
         Where :math:`E_i` is the :math:`i^{\textrm{th}}` element in `net_electricity_consumption`, :math:`E`, that has a length of :math:`n`.
 
         Examples
@@ -81,7 +81,7 @@ class CostFunction:
             Electricity consumption time series.
         daily_time_step : int, default: 24
             Number of time steps in a day.
-            
+
         Returns
         -------
         average_daily_peak : List[float]
@@ -111,11 +111,11 @@ class CostFunction:
             Electricity consumption time series.
         window : int, default: 8760
             Period window/time steps to find peaks.
-            
+
         Returns
         -------
         peak_demand : List[float]
-            Peak demand cost.        
+            Peak demand cost.
 
         Examples
         --------
@@ -138,11 +138,11 @@ class CostFunction:
         ----------
         net_electricity_consumption : List[float]
             Electricity consumption time series.
-            
+
         Returns
         -------
         net_electricity_consumption : List[float]
-            Net electricity consumption cost.        
+            Net electricity consumption cost.
 
         Examples
         --------
@@ -163,11 +163,11 @@ class CostFunction:
         ----------
         carbon_emissions : List[float]
             Carbon emissions time series.
-            
+
         Returns
         -------
         carbon_emissions : List[float]
-            Carbon emissions cost.        
+            Carbon emissions cost.
 
         Examples
         --------
@@ -188,11 +188,11 @@ class CostFunction:
         ----------
         price : List[float]
             Price time series.
-            
+
         Returns
         -------
         price : List[float]
-            Price cost.        
+            Price cost.
 
         Examples
         --------
@@ -213,7 +213,7 @@ class CostFunction:
         ----------
         net_electricity_consumption : List[float]
             Electricity consumption time series.
-            
+
         Returns
         -------
         quadratic : List[float]
@@ -221,7 +221,7 @@ class CostFunction:
 
         Notes
         -----
-        Net electricity consumption values are clipped at a minimum of 0 before calculating the quadratic cost.      
+        Net electricity consumption values are clipped at a minimum of 0 before calculating the quadratic cost.
 
         Examples
         --------

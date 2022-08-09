@@ -90,7 +90,7 @@ class CityLearnEnv(Environment, Env):
         r"""Get observation value transformers/encoders for use in buildings' agent(s) algorithm.
 
         See `Building.observation_encoders` documentation for more information.
-        
+
         Returns
         -------
         encoders : Union[List[Encoder], List[List[Encoder]]
@@ -98,14 +98,14 @@ class CityLearnEnv(Environment, Env):
 
         Notes
         -----
-        If `central_agent` is True, 1 list containing all buildings' encoders is returned in the same order as `buildings`. 
+        If `central_agent` is True, 1 list containing all buildings' encoders is returned in the same order as `buildings`.
         The `shared_observations` encoders are only included in the first building's listing.
-        If `central_agent` is False, a list of sublists is returned where each sublist is a list of 1 building's encoders 
+        If `central_agent` is False, a list of sublists is returned where each sublist is a list of 1 building's encoders
         and the sublist in the same order as `buildings`.
         """
 
         return [
-            k for i, b in enumerate(self.buildings) for k, s in zip(b.observation_encoders, b.active_observations) 
+            k for i, b in enumerate(self.buildings) for k, s in zip(b.observation_encoders, b.active_observations)
             if i == 0 or s not in self.shared_observations
         ] if self.central_agent else [b.observation_encoders for b in self.buildings]
 
@@ -117,27 +117,27 @@ class CityLearnEnv(Environment, Env):
         -------
         observation_space : List[spaces.Box]
             List of agent(s) observation spaces.
-        
+
         Notes
         -----
-        If `central_agent` is True, a list of 1 `spaces.Box` object is returned that contains all buildings' limits with the limits in the same order as `buildings`. 
+        If `central_agent` is True, a list of 1 `spaces.Box` object is returned that contains all buildings' limits with the limits in the same order as `buildings`.
         The `shared_observations` limits are only included in the first building's limits. If `central_agent` is False, a list of `space.Box` objects as
         many as `buildings` is returned in the same order as `buildings`.
         """
 
         if self.central_agent:
             low_limit = [
-                v for i, b in enumerate(self.buildings) for v, s in zip(b.observation_space.low, b.active_observations) 
+                v for i, b in enumerate(self.buildings) for v, s in zip(b.observation_space.low, b.active_observations)
                 if i == 0 or s not in self.shared_observations
             ]
             high_limit = [
-                v for i, b in enumerate(self.buildings) for v, s in zip(b.observation_space.high, b.active_observations) 
+                v for i, b in enumerate(self.buildings) for v, s in zip(b.observation_space.high, b.active_observations)
                 if i == 0 or s not in self.shared_observations
             ]
-            observation_space = [spaces.Box(low=np.array(low_limit), high=np.array(high_limit), dtype=np.float32)]
+            observation_space = [spaces.Box(low=np.array(low_limit), high=np.array(high_limit), dtype=np.float32)][0]
         else:
             observation_space = [b.observation_space for b in self.buildings]
-        
+
         return observation_space
 
     @property
@@ -148,36 +148,36 @@ class CityLearnEnv(Environment, Env):
         -------
         action_space : List[spaces.Box]
             List of agent(s) action spaces.
-        
+
         Notes
         -----
-        If `central_agent` is True, a list of 1 `spaces.Box` object is returned that contains all buildings' limits with the limits in the same order as `buildings`. 
+        If `central_agent` is True, a list of 1 `spaces.Box` object is returned that contains all buildings' limits with the limits in the same order as `buildings`.
         If `central_agent` is False, a list of `space.Box` objects as many as `buildings` is returned in the same order as `buildings`.
         """
 
         if self.central_agent:
             low_limit = [v for b in self.buildings for v in b.action_space.low]
             high_limit = [v for b in self.buildings for v in b.action_space.high]
-            action_space = [spaces.Box(low=np.array(low_limit), high=np.array(high_limit), dtype=np.float32)]
+            action_space = [spaces.Box(low=np.array(low_limit), high=np.array(high_limit), dtype=np.float32)][0]
         else:
             action_space = [b.action_space for b in self.buildings]
-        
+
         return action_space
 
     @property
     def observations(self) -> List[List[float]]:
         """Observations at current time step.
-        
+
         Notes
         -----
-        If `central_agent` is True, a list of 1 sublist containing all building observation values is returned in the same order as `buildings`. 
-        The `shared_observations` values are only included in the first building's observation values. If `central_agent` is False, a list of sublists 
+        If `central_agent` is True, a list of 1 sublist containing all building observation values is returned in the same order as `buildings`.
+        The `shared_observations` values are only included in the first building's observation values. If `central_agent` is False, a list of sublists
         is returned where each sublist is a list of 1 building's observation values and the sublist in the same order as `buildings`.
         """
 
-        return [[
-            v for i, b in enumerate(self.buildings) for k, v in b.observations.items() if i == 0 or k not in self.shared_observations
-        ]] if self.central_agent else [list(b.observations.values()) for b in self.buildings]
+        # from IPython import embed
+        # embed()
+        return [[v for i, b in enumerate(self.buildings) for k, v in b.observations.items() if i == 0 or k not in self.shared_observations]][0] if self.central_agent else [list(b.observations.values()) for b in self.buildings]
 
     @property
     def net_electricity_consumption_without_storage_and_pv_emission(self) -> np.ndarray:
@@ -232,6 +232,25 @@ class CityLearnEnv(Environment, Env):
         """Summed `Building.net_electricity_consumption` time series, in [kWh]."""
 
         return pd.DataFrame([b.net_electricity_consumption for b in self.buildings]).sum(axis = 0, min_count = 1).to_numpy()
+
+    @property
+    def last_net_electricity_consumption_emission(self) -> np.ndarray:
+        """Summed `Building.net_electricity_consumption_emission` time series, in [kg_co2]."""
+
+        return pd.DataFrame([b.net_electricity_consumption_emission[-1:] for b in self.buildings]).sum(axis = 0, min_count = 1).to_numpy()[0]
+
+    @property
+    def last_net_electricity_consumption_price(self) -> np.ndarray:
+        """Summed `Building.net_electricity_consumption_price` time series, in [$]."""
+
+        return pd.DataFrame([b.net_electricity_consumption_price[-1:] for b in self.buildings]).sum(axis = 0, min_count = 1).to_numpy()[0]
+
+    @property
+    def last_net_electricity_consumption(self) -> np.ndarray:
+        """Summed `Building.net_electricity_consumption` time series, in [kWh]."""
+
+        return pd.DataFrame([b.net_electricity_consumption[-1:] for b in self.buildings]).sum(axis = 0, min_count = 1).to_numpy()[0]
+
 
     @property
     def cooling_electricity_consumption(self) -> np.ndarray:
@@ -326,7 +345,7 @@ class CityLearnEnv(Environment, Env):
     @property
     def energy_from_heating_storage(self) -> np.ndarray:
         """Summed `Building.energy_from_heating_storage` time series, in [kWh]."""
-        
+
         return pd.DataFrame([b.energy_from_heating_storage for b in self.buildings]).sum(axis = 0, min_count = 1).to_numpy()
 
     @property
@@ -399,7 +418,7 @@ class CityLearnEnv(Environment, Env):
     @staticmethod
     def get_default_shared_observations() -> List[str]:
         """Names of default common observations across all buildings i.e. observations that have the same value irrespective of the building.
-        
+
         Notes
         -----
         May be used to assigned :attr:`shared_observations` value during `CityLearnEnv` object initialization.
@@ -421,11 +440,11 @@ class CityLearnEnv(Environment, Env):
 
     def step(self, actions: List[List[float]]):
         """Apply actions to `buildings` and advance to next time step.
-        
+
         Parameters
         ----------
         actions: List[List[float]]
-            Fractions of `buildings` storage devices' capacities to charge/discharge by. 
+            Fractions of `buildings` storage devices' capacities to charge/discharge by.
             If `central_agent` is True, `actions` parameter should be a list of 1 list containing all buildings' actions and follows
             the ordering of buildings in `buildings`. If `central_agent` is False, `actions` parameter should be a list of sublists
             where each sublists contains the actions for each building in `buildings`  and follows the ordering of buildings in `buildings`.
@@ -434,9 +453,9 @@ class CityLearnEnv(Environment, Env):
         -------
         observations: List[List[float]]
             :attr:`observations` current value.
-        reward: List[float] 
+        reward: List[float]
             :meth:`get_reward` current value.
-        done: bool 
+        done: bool
             A boolean value for if the episode has ended, in which case further :meth:`step` calls will return undefined results.
             A done signal may be emitted for different reasons: Maybe the task underlying the environment was solved successfully,
             a certain timelimit was exceeded, or the physics simulation has entered an invalid observation.
@@ -445,6 +464,11 @@ class CityLearnEnv(Environment, Env):
             `info` contains auxiliary diagnostic information (helpful for debugging, learning, and logging).
             Override :meth"`get_info` to get custom key-value pairs in `info`.
         """
+        if self.time_step > 0 and self.time_step % (8760 / 12) * 1 == 0:
+            print(f"Eval metrics: {self.evaluate()}")
+
+        if self.central_agent:
+            actions = [actions]
 
         actions = self.__parse_actions(actions)
 
@@ -454,22 +478,23 @@ class CityLearnEnv(Environment, Env):
         self.next_time_step()
         reward = self.get_reward()
         self.__rewards.append(reward)
-        return self.observations, reward, self.done, self.get_info()
+
+        return self.observations, reward[0], self.done, self.get_info()
 
     def get_reward(self) -> List[float]:
         """Calculate agent(s) reward(s) using :attr:`reward_function`.
-        
+
         Returns
         -------
         reward: List[float]
             Reward for current observations. If `central_agent` is True, `reward` is a list of length = 1 else, `reward` has same length as `buildings`.
         """
 
-        self.reward_function.electricity_consumption = [self.net_electricity_consumption[self.time_step]] if self.central_agent\
+        self.reward_function.electricity_consumption = [self.last_net_electricity_consumption] if self.central_agent\
             else [b.net_electricity_consumption[self.time_step] for b in self.buildings]
-        self.reward_function.carbon_emission = [self.net_electricity_consumption_emission[self.time_step]] if self.central_agent\
+        self.reward_function.carbon_emission = [self.last_net_electricity_consumption_emission] if self.central_agent\
             else [b.net_electricity_consumption_emission[self.time_step] for b in self.buildings]
-        self.reward_function.electricity_price = [self.net_electricity_consumption_price[self.time_step]] if self.central_agent\
+        self.reward_function.electricity_price = [self.last_net_electricity_consumption_price] if self.central_agent\
             else [b.net_electricity_consumption_price[self.time_step] for b in self.buildings]
         reward = self.reward_function.calculate()
         return reward
@@ -485,7 +510,7 @@ class CityLearnEnv(Environment, Env):
 
         if self.central_agent:
             actions = actions[0]
-            
+
             for building in self.buildings:
                 size = building.action_space.shape[0]
                 building_actions.append(actions[0:size])
@@ -498,7 +523,7 @@ class CityLearnEnv(Environment, Env):
         actions = [{k:a for k, a in zip(active_actions[i],building_actions[i])} for i in range(len(active_actions))]
         actions = [{f'{k}_action':actions[i].get(k, 0.0) for k in b.action_metadata} for i, b in enumerate(self.buildings)]
         return actions
-    
+
     def get_building_information(self) -> Mapping[str, Any]:
         """Get buildings PV capacity, end-use annual demands, and correlations with other buildings end-use annual demands.
 
@@ -523,7 +548,7 @@ class CityLearnEnv(Environment, Env):
             building_info[building.uid]['correlations_cooling_demand'] = {}
             building_info[building.uid]['correlations_heating_demand'] = {}
             building_info[building.uid]['correlations_non_shiftable_load'] = {}
-            
+
             for corr_building in self.buildings:
                 if building.uid != corr_building.uid:
                     building_info[building.uid]['correlations_dhw'][corr_building.uid] = round((np.corrcoef(
@@ -540,7 +565,7 @@ class CityLearnEnv(Environment, Env):
                     ))[0][1], 3)
                 else:
                     continue
-        
+
         return building_info
 
     def render(self):
@@ -558,12 +583,12 @@ class CityLearnEnv(Environment, Env):
             charge = max(min(charge, 1.0), 0.0)
 
             # render
-            rbuilding = RenderBuilding(index=i, 
-                                canvas_size=canvas_size, 
-                                num_buildings=num_buildings, 
+            rbuilding = RenderBuilding(index=i,
+                                canvas_size=canvas_size,
+                                num_buildings=num_buildings,
                                 line_color=color)
-            rbuilding.draw_line(canvas, draw_obj, 
-                                energy=energy, 
+            rbuilding.draw_line(canvas, draw_obj,
+                                energy=energy,
                                 color=color)
             rbuilding.draw_building(canvas, charge=charge)
 
@@ -577,15 +602,15 @@ class CityLearnEnv(Environment, Env):
             b.energy_simulation.non_shiftable_load - b.pv.get_generation(b.energy_simulation.solar_generation) for b in self.buildings
         ],axis=0)
         net_electricity_consumption_y_lim = (
-            min(all_time_net_electricity_consumption_without_storage - (self.buildings[0].electrical_storage.nominal_power)*len(self.buildings)), 
+            min(all_time_net_electricity_consumption_without_storage - (self.buildings[0].electrical_storage.nominal_power)*len(self.buildings)),
             max(all_time_net_electricity_consumption_without_storage + (self.buildings[0].electrical_storage.nominal_power)*len(self.buildings))
         )
         net_electricity_consumption_without_storage_y_lim = (
-            min(all_time_net_electricity_consumption_without_storage), 
+            min(all_time_net_electricity_consumption_without_storage),
             max(all_time_net_electricity_consumption_without_storage)
         )
         net_electricity_consumption_without_storage_and_pv_y_lim = (
-            0, 
+            0,
             max(np.sum([b.energy_simulation.non_shiftable_load for b in self.buildings], axis=0))
         )
 
@@ -593,9 +618,9 @@ class CityLearnEnv(Environment, Env):
         limits = [net_electricity_consumption_y_lim, net_electricity_consumption_without_storage_y_lim, net_electricity_consumption_without_storage_and_pv_y_lim]
         plot_image = get_plots(values, limits)
         graphic_image = np.asarray(canvas)
-        
+
         return np.concatenate([graphic_image, plot_image], axis=1)
-    
+
     def evaluate(self):
         """Only applies to the CityLearn Challenge 2022 setup."""
 
@@ -611,16 +636,16 @@ class CityLearnEnv(Environment, Env):
 
         for building in self.buildings:
             building.next_time_step()
-            
+
         super().next_time_step()
 
     def reset(self):
         r"""Reset `CityLearnEnv` to initial state.
-        
+
         Returns
         -------
         observations: List[List[float]]
-            :attr:`observations`. 
+            :attr:`observations`.
         """
 
         self.__rewards = [[]]
@@ -633,7 +658,7 @@ class CityLearnEnv(Environment, Env):
 
     def load_agents(self) -> List[Agent]:
         """Return :class:`Agent` or sub class objects as defined by the `schema`.
-        
+
         Returns
         -------
         agents: List[Agent]
@@ -658,7 +683,7 @@ class CityLearnEnv(Environment, Env):
 
     def __load(self) -> Tuple[List[Building], int, float, RewardFunction, bool, List[str]]:
         """Return `CityLearnEnv` and `Controller` objects as defined by the `schema`.
-        
+
         Returns
         -------
         buildings : List[Building]
@@ -674,7 +699,7 @@ class CityLearnEnv(Environment, Env):
         shared_observations : List[str], optional
             Names of common observations across all buildings i.e. observations that have the same value irrespective of the building.
         """
-        
+
         if isinstance(self.schema, (str, Path)) and os.path.isfile(self.schema):
             schema_filepath = Path(self.schema) if isinstance(self.schema, str) else self.schema
             self.schema = read_json(self.schema)
@@ -697,7 +722,7 @@ class CityLearnEnv(Environment, Env):
         time_steps = (simulation_end_time_step - simulation_start_time_step) + 1
         seconds_per_time_step = self.schema['seconds_per_time_step']
         buildings = ()
-        
+
         for building_name, building_schema in self.schema['buildings'].items():
             if building_schema['include']:
                 # data
@@ -718,7 +743,7 @@ class CityLearnEnv(Environment, Env):
                     pricing = Pricing(*pricing.values.T)
                 else:
                     pricing = None
-                    
+
                 # observation and action metadata
                 inactive_observations = [] if building_schema.get('inactive_observations', None) is None else building_schema['inactive_observations']
                 inactive_actions = [] if building_schema.get('inactive_actions', None) is None else building_schema['inactive_actions']
@@ -730,13 +755,13 @@ class CityLearnEnv(Environment, Env):
 
                 # update devices
                 device_metadata = {
-                    'dhw_storage': {'autosizer': building.autosize_dhw_storage},  
-                    'cooling_storage': {'autosizer': building.autosize_cooling_storage}, 
-                    'heating_storage': {'autosizer': building.autosize_heating_storage}, 
-                    'electrical_storage': {'autosizer': building.autosize_electrical_storage}, 
-                    'cooling_device': {'autosizer': building.autosize_cooling_device}, 
-                    'heating_device': {'autosizer': building.autosize_heating_device}, 
-                    'dhw_device': {'autosizer': building.autosize_dhw_device}, 
+                    'dhw_storage': {'autosizer': building.autosize_dhw_storage},
+                    'cooling_storage': {'autosizer': building.autosize_cooling_storage},
+                    'heating_storage': {'autosizer': building.autosize_heating_storage},
+                    'electrical_storage': {'autosizer': building.autosize_electrical_storage},
+                    'cooling_device': {'autosizer': building.autosize_cooling_device},
+                    'heating_device': {'autosizer': building.autosize_heating_device},
+                    'dhw_device': {'autosizer': building.autosize_dhw_device},
                     'pv': {'autosizer': building.autosize_pv}
                 }
 
@@ -760,11 +785,11 @@ class CityLearnEnv(Environment, Env):
                             autosizer(**autosize_kwargs)
                         else:
                             pass
-                
+
                 building.observation_space = building.estimate_observation_space()
                 building.action_space = building.estimate_action_space()
                 buildings += (building,)
-                
+
             else:
                 continue
 
@@ -787,6 +812,6 @@ class UnknownSchemaError(Error):
     __MESSAGE = 'Unknown schema parsed into constructor. Schema must be name of CityLearn data set,'\
         ' a filepath to JSON representation or `dict` object of a CityLearn schema.'\
         ' Call citylearn.data.DataSet.get_names() for list of available CityLearn data sets.'
-  
+
     def __init__(self,message=None):
         super().__init__(self.__MESSAGE if message is None else message)

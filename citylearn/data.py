@@ -12,7 +12,7 @@ class DataSet:
     @staticmethod
     def get_names() -> List[str]:
         return sorted([
-            d for d in os.listdir(DataSet.__ROOT_DIRECTORY) 
+            d for d in os.listdir(DataSet.__ROOT_DIRECTORY)
             if os.path.isdir(os.path.join(DataSet.__ROOT_DIRECTORY,d))
         ])
 
@@ -72,7 +72,7 @@ class EnergySimulation:
 
     def __init__(
         self, month: Iterable[int], hour: Iterable[int], day_type: Iterable[int],
-        daylight_savings_status: Iterable[int], indoor_dry_bulb_temperature: Iterable[float], average_unmet_cooling_setpoint_difference: Iterable[float], indoor_relative_humidity: Iterable[float], 
+        daylight_savings_status: Iterable[int], indoor_dry_bulb_temperature: Iterable[float], average_unmet_cooling_setpoint_difference: Iterable[float], indoor_relative_humidity: Iterable[float],
         non_shiftable_load: Iterable[float], dhw_demand: Iterable[float], cooling_demand: Iterable[float], heating_demand: Iterable[float],
         solar_generation: Iterable[float]
     ):
@@ -131,7 +131,7 @@ class Weather:
     """
 
     def __init__(
-        self, outdoor_dry_bulb_temperature: Iterable[float], outdoor_relative_humidity: Iterable[float], diffuse_solar_irradiance: Iterable[float], direct_solar_irradiance: Iterable[float], 
+        self, outdoor_dry_bulb_temperature: Iterable[float], outdoor_relative_humidity: Iterable[float], diffuse_solar_irradiance: Iterable[float], direct_solar_irradiance: Iterable[float],
         outdoor_dry_bulb_temperature_predicted_6h: Iterable[float], outdoor_dry_bulb_temperature_predicted_12h: Iterable[float], outdoor_dry_bulb_temperature_predicted_24h: Iterable[float],
         outdoor_relative_humidity_predicted_6h: Iterable[float], outdoor_relative_humidity_predicted_12h: Iterable[float], outdoor_relative_humidity_predicted_24h: Iterable[float],
         diffuse_solar_irradiance_predicted_6h: Iterable[float], diffuse_solar_irradiance_predicted_12h: Iterable[float], diffuse_solar_irradiance_predicted_24h: Iterable[float],
@@ -172,7 +172,7 @@ class Pricing:
     """
 
     def __init__(
-        self, electricity_pricing: Iterable[float], electricity_pricing_predicted_6h: Iterable[float], 
+        self, electricity_pricing: Iterable[float], electricity_pricing_predicted_6h: Iterable[float],
         electricity_pricing_predicted_12h: Iterable[float], electricity_pricing_predicted_24h: Iterable[float]
     ):
         r"""Initialize `Pricing`."""

@@ -9,8 +9,8 @@ from citylearn.preprocessing import Encoder, PeriodicNormalization, OnehotEncodi
 
 class Building(Environment):
     def __init__(
-        self, energy_simulation: EnergySimulation, weather: Weather, observation_metadata: Mapping[str, bool], action_metadata: Mapping[str, bool], carbon_intensity: CarbonIntensity = None, 
-        pricing: Pricing = None, dhw_storage: StorageTank = None, cooling_storage: StorageTank = None, heating_storage: StorageTank = None, electrical_storage: Battery = None, 
+        self, energy_simulation: EnergySimulation, weather: Weather, observation_metadata: Mapping[str, bool], action_metadata: Mapping[str, bool], carbon_intensity: CarbonIntensity = None,
+        pricing: Pricing = None, dhw_storage: StorageTank = None, cooling_storage: StorageTank = None, heating_storage: StorageTank = None, electrical_storage: Battery = None,
         dhw_device: Union[HeatPump, ElectricHeater] = None, cooling_device: HeatPump = None, heating_device: Union[HeatPump, ElectricHeater] = None, pv: PV = None, name: str = None, **kwargs
     ):
         r"""Initialize `Building`.
@@ -72,6 +72,7 @@ class Building(Environment):
         self.__observation_epsilon = 1.0 # to avoid out of bound observations
         self.observation_space = self.estimate_observation_space()
         self.action_space = self.estimate_action_space()
+        self.__net_electricity_consumption = []
         super().__init__(**kwargs)
 
     @property
@@ -183,7 +184,7 @@ class Building(Environment):
         The encoder classes are defined in the `preprocessing.py` module and include `PeriodicNormalization` for cyclic observations,
         `OnehotEncoding` for categorical obeservations, `RemoveFeature` for non-applicable observations given available storage systems and devices
         and `Normalize` for observations with known mnimum and maximum boundaries.
-        
+
         Returns
         -------
         encoders : List[Encoder]
@@ -216,16 +217,16 @@ class Building(Environment):
         for i, observation in enumerate(self.active_observations):
             if observation in ['month', 'hour']:
                 encoders.append(PeriodicNormalization(self.observation_space.high[i]))
-            
+
             elif observation == 'day_type':
                 encoders.append(OnehotEncoding([0, 1, 2, 3, 4, 5, 6, 7, 8]))
-            
+
             elif observation == "daylight_savings_status":
                 encoders.append(OnehotEncoding([0, 1, 2]))
-            
+
             elif observation in remove_features:
                 encoders.append(RemoveFeature())
-            
+
             else:
                 encoders.append(Normalize(self.observation_space.low[i], self.observation_space.high[i]))
 
@@ -283,8 +284,8 @@ class Building(Environment):
 
     @property
     def net_electricity_consumption_without_storage_and_pv(self) -> np.ndarray:
-        """Net electricity consumption in the absence of flexibility provided by `cooling_storage` and self generation time series, in [kWh]. 
-        
+        """Net electricity consumption in the absence of flexibility provided by `cooling_storage` and self generation time series, in [kWh].
+
         Notes
         -----
         net_electricity_consumption_without_storage_and_pv = `net_electricity_consumption_without_storage` - `solar_generation`
@@ -306,8 +307,8 @@ class Building(Environment):
 
     @property
     def net_electricity_consumption_without_storage(self) -> np.ndarray:
-        """net electricity consumption in the absence of flexibility provided by storage devices time series, in [kWh]. 
-        
+        """net electricity consumption in the absence of flexibility provided by storage devices time series, in [kWh].
+
         Notes
         -----
         net_electricity_consumption_without_storage = `net_electricity_consumption` - (`cooling_storage_electricity_consumption` + `heating_storage_electricity_consumption` + `dhw_storage_electricity_consumption` + `electrical_storage_electricity_consumption`)
@@ -334,27 +335,36 @@ class Building(Environment):
 
     @property
     def net_electricity_consumption(self) -> np.ndarray:
-        """net electricity consumption time series, in [kWh]. 
-        
+        """net electricity consumption time series, in [kWh].
+
         Notes
         -----
         net_electricity_consumption = `cooling_electricity_consumption` + `heating_electricity_consumption` + `dhw_electricity_consumption` + `electrical_storage_electricity_consumption` + `non_shiftable_load_demand` + `solar_generation`
         """
-
-        return np.sum([
-            self.cooling_electricity_consumption,
-            self.heating_electricity_consumption,
-            self.dhw_electricity_consumption,
-            self.electrical_storage_electricity_consumption,
-            self.non_shiftable_load_demand,
-            self.solar_generation,
-        ], axis = 0)
+        if self.__net_electricity_consumption is None or len(self.solar_generation) > len(self.__net_electricity_consumption):
+            self.__net_electricity_consumption.append( np.sum([
+                                                        self.cooling_electricity_consumption[-1],
+                                                        self.heating_electricity_consumption[-1],
+                                                        self.dhw_electricity_consumption[-1],
+                                                        self.electrical_storage_electricity_consumption[-1],
+                                                        self.non_shiftable_load_demand[-1],
+                                                        self.solar_generation[-1],
+                                                        ], axis = 0))
+        return self.__net_electricity_consumption
+        # return np.sum([
+        #     self.cooling_electricity_consumption,
+        #     self.heating_electricity_consumption,
+        #     self.dhw_electricity_consumption,
+        #     self.electrical_storage_electricity_consumption,
+        #     self.non_shiftable_load_demand,
+        #     self.solar_generation,
+        # ], axis = 0)
 
     @property
     def cooling_electricity_consumption(self) -> np.ndarray:
-        """`cooling_device` net electricity consumption in meeting domestic hot water and `cooling_stoage` energy demand time series, in [kWh]. 
-        
-        Positive values indicate `cooling_device` electricity consumption to charge `cooling_storage` and/or meet `cooling_demand` while negative values indicate avoided `cooling_device` 
+        """`cooling_device` net electricity consumption in meeting domestic hot water and `cooling_stoage` energy demand time series, in [kWh].
+
+        Positive values indicate `cooling_device` electricity consumption to charge `cooling_storage` and/or meet `cooling_demand` while negative values indicate avoided `cooling_device`
         electricity consumption by discharging `cooling_storage` to meet `cooling_demand`.
         """
 
@@ -363,9 +373,9 @@ class Building(Environment):
 
     @property
     def heating_electricity_consumption(self) -> np.ndarray:
-        """`heating_device` net electricity consumption in meeting domestic hot water and `heating_stoage` energy demand time series, in [kWh]. 
-        
-        Positive values indicate `heating_device` electricity consumption to charge `heating_storage` and/or meet `heating_demand` while negative values indicate avoided `heating_device` 
+        """`heating_device` net electricity consumption in meeting domestic hot water and `heating_stoage` energy demand time series, in [kWh].
+
+        Positive values indicate `heating_device` electricity consumption to charge `heating_storage` and/or meet `heating_demand` while negative values indicate avoided `heating_device`
         electricity consumption by discharging `heating_storage` to meet `heating_demand`.
         """
 
@@ -380,9 +390,9 @@ class Building(Environment):
 
     @property
     def dhw_electricity_consumption(self) -> np.ndarray:
-        """`dhw_device` net electricity consumption in meeting domestic hot water and `dhw_stoage` energy demand time series, in [kWh]. 
-        
-        Positive values indicate `dhw_device` electricity consumption to charge `dhw_storage` and/or meet `dhw_demand` while negative values indicate avoided `dhw_device` 
+        """`dhw_device` net electricity consumption in meeting domestic hot water and `dhw_stoage` energy demand time series, in [kWh].
+
+        Positive values indicate `dhw_device` electricity consumption to charge `dhw_storage` and/or meet `dhw_demand` while negative values indicate avoided `dhw_device`
         electricity consumption by discharging `dhw_storage` to meet `dhw_demand`.
         """
 
@@ -397,9 +407,9 @@ class Building(Environment):
 
     @property
     def cooling_storage_electricity_consumption(self) -> np.ndarray:
-        """`cooling_storage` net electricity consumption time series, in [kWh]. 
-        
-        Positive values indicate `cooling_device` electricity consumption to charge `cooling_storage` while negative values indicate avoided `cooling_device` 
+        """`cooling_storage` net electricity consumption time series, in [kWh].
+
+        Positive values indicate `cooling_device` electricity consumption to charge `cooling_storage` while negative values indicate avoided `cooling_device`
         electricity consumption by discharging `cooling_storage` to meet `cooling_demand`.
         """
 
@@ -407,9 +417,9 @@ class Building(Environment):
 
     @property
     def heating_storage_electricity_consumption(self) -> np.ndarray:
-        """`heating_storage` net electricity consumption time series, in [kWh]. 
-        
-        Positive values indicate `heating_device` electricity consumption to charge `heating_storage` while negative values indicate avoided `heating_device` 
+        """`heating_storage` net electricity consumption time series, in [kWh].
+
+        Positive values indicate `heating_device` electricity consumption to charge `heating_storage` while negative values indicate avoided `heating_device`
         electricity consumption by discharging `heating_storage` to meet `heating_demand`.
         """
 
@@ -422,9 +432,9 @@ class Building(Environment):
 
     @property
     def dhw_storage_electricity_consumption(self) -> np.ndarray:
-        """`dhw_storage` net electricity consumption time series, in [kWh]. 
-        
-        Positive values indicate `dhw_device` electricity consumption to charge `dhw_storage` while negative values indicate avoided `dhw_device` 
+        """`dhw_storage` net electricity consumption time series, in [kWh].
+
+        Positive values indicate `dhw_device` electricity consumption to charge `dhw_storage` while negative values indicate avoided `dhw_device`
         electricity consumption by discharging `dhw_storage` to meet `dhw_demand`.
         """
 
@@ -694,7 +704,7 @@ class Building(Environment):
         demand = space_demand + energy
         input_power = self.dhw_device.get_input_power(demand, self.weather.outdoor_dry_bulb_temperature[self.time_step], False)\
             if isinstance(self.dhw_device, HeatPump) else self.dhw_device.get_input_power(demand)
-        self.dhw_device.update_electricity_consumption(input_power) 
+        self.dhw_device.update_electricity_consumption(input_power)
 
     def update_electrical_storage(self, action: float = 0):
         r"""Charge/discharge `electrical_storage`.
@@ -744,7 +754,7 @@ class Building(Environment):
                                         + (self.heating_storage.capacity/0.8)\
                                             + (self.electrical_storage.capacity/0.8)\
                                                 - data['solar_generation']
-    
+
                 low_limit.append(-max(abs(net_electric_consumption)))
                 high_limit.append(max(abs(net_electric_consumption)))
 
@@ -759,7 +769,7 @@ class Building(Environment):
         low_limit = [v - self.__observation_epsilon for v in low_limit]
         high_limit = [v + self.__observation_epsilon for v in high_limit]
         return spaces.Box(low=np.array(low_limit, dtype='float32'), high=np.array(high_limit, dtype='float32'))
-    
+
     def estimate_action_space(self) -> spaces.Box:
         r"""Get estimate of action spaces.
 
@@ -772,19 +782,19 @@ class Building(Environment):
 
         Notes
         -----
-        The lower and upper bounds for the `cooling_storage`, `heating_storage` and `dhw_storage` actions are set to (+/-) 1/maximum_demand for each respective end use, 
-        as the energy storage device can't provide the building with more energy than it will ever need for a given time step. . 
+        The lower and upper bounds for the `cooling_storage`, `heating_storage` and `dhw_storage` actions are set to (+/-) 1/maximum_demand for each respective end use,
+        as the energy storage device can't provide the building with more energy than it will ever need for a given time step. .
         For example, if `cooling_storage` capacity is 20 kWh and the maximum `cooling_demand` is 5 kWh, its actions will be bounded between -5/20 and 5/20.
-        These boundaries should speed up the learning process of the agents and make them more stable compared to setting them to -1 and 1. 
+        These boundaries should speed up the learning process of the agents and make them more stable compared to setting them to -1 and 1.
         """
-        
+
         low_limit, high_limit = [], []
- 
+
         for key in self.active_actions:
             if key == 'electrical_storage':
                 low_limit.append(-1.0)
                 high_limit.append(1.0)
-            
+
             else:
                 capacity = vars(self)[f'_{self.__class__.__name__}__{key}'].capacity
                 energy_simulation = vars(self)[f'_{self.__class__.__name__}__energy_simulation']
@@ -797,12 +807,12 @@ class Building(Environment):
                 except ZeroDivisionError:
                     low_limit.append(-1.0)
                     high_limit.append(1.0)
- 
+
         return spaces.Box(low=np.array(low_limit, dtype='float32'), high=np.array(high_limit, dtype='float32'))
 
     def autosize_cooling_device(self, **kwargs):
         """Autosize `cooling_device` `nominal_power` to minimum power needed to always meet `cooling_demand`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -813,7 +823,7 @@ class Building(Environment):
 
     def autosize_heating_device(self, **kwargs):
         """Autosize `heating_device` `nominal_power` to minimum power needed to always meet `heating_demand`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -825,7 +835,7 @@ class Building(Environment):
 
     def autosize_dhw_device(self, **kwargs):
         """Autosize `dhw_device` `nominal_power` to minimum power needed to always meet `dhw_demand`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -837,7 +847,7 @@ class Building(Environment):
 
     def autosize_cooling_storage(self, **kwargs):
         """Autosize `cooling_storage` `capacity` to minimum capacity needed to always meet `cooling_demand`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -848,7 +858,7 @@ class Building(Environment):
 
     def autosize_heating_storage(self, **kwargs):
         """Autosize `heating_storage` `capacity` to minimum capacity needed to always meet `heating_demand`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -859,7 +869,7 @@ class Building(Environment):
 
     def autosize_dhw_storage(self, **kwargs):
         """Autosize `dhw_storage` `capacity` to minimum capacity needed to always meet `dhw_demand`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -870,7 +880,7 @@ class Building(Environment):
 
     def autosize_electrical_storage(self, **kwargs):
         """Autosize `electrical_storage` `capacity` to minimum capacity needed to store maximum `solar_generation`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -881,7 +891,7 @@ class Building(Environment):
 
     def autosize_pv(self, **kwargs):
         """Autosize `PV` `nominal_pwer` to minimum nominal_power needed to output maximum `solar_generation`.
-        
+
         Other Parameters
         ----------------
         **kwargs : dict
@@ -915,3 +925,4 @@ class Building(Environment):
         self.heating_device.reset()
         self.dhw_device.reset()
         self.pv.reset()
+        self.__net_electricity_consumption = []
